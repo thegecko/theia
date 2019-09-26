@@ -2,14 +2,23 @@
 
 In order to release one should:
 
+- announce upcoming release
 - pre-publishing steps
 - login to the npm registry
 - publish packages
 - commit updated versions
+- reset local HEAD to match release commit
 - tag the published version
+- announce release is done
+
+
+## Announce upcoming release 
+It's good to give a heads-up to the Theia developers some hours before a release. One can use whatever forum is appropriate. At the time of writing this is `spectrum`. Here is an [example](https://spectrum.chat/theia/dev/0-11-0-release~f8181a53-436a-4b35-a3e3-a447a298a334).
 
 ## Pre-Publishing Steps
 Before publishing it's important to make sure that theia-apps builds against 'next'. Else we will have problems with "latest" after publishing
+
+- Update the forum release post to ask committers to hold-off merging any PR while the release is ongoing.
 
 - Make sure that there is no pending build on Theia master, otherwise a new "next" version might be published while we validate the current "next".
 
@@ -33,7 +42,7 @@ If publishing of an individual package failed then publish it with `npm publish`
 
     git add *
     git commit -m "publish v${published.version}" -s
-    git push origin HEAD
+    git push ${remote for main theia repo} master:${branch}
 
 The version picked during package publishing should be used as `${published.version}`.
 
@@ -41,7 +50,21 @@ For example, if you picked `0.1.0` as a version then you should run:
 
     git add *
     git commit -m "publish v0.1.0" -s
-    git push origin HEAD
+    git push origin master:release_0_1_0
+
+Then from the project's [main page](https://github.com/eclipse-theia/theia), create a pull request from the branch just pushed. Have another committer on standby to quickly review and approve the PR, then merge it.
+
+## Reset local HEAD to match release commit
+
+(so that the tag we will add is attached to correct commit)
+
+    git fetch ${remote for main theia repo}
+    git reset --hard ${remote for main theia repo}/master
+
+For example:
+
+    git fetch origin
+    git reset --hard origin/master
 
 ## Tagging the published version
 
@@ -56,3 +79,9 @@ For example, if you picked `0.1.0` as a version then you should run:
 
     git tag v0.1.0
     git push origin v0.1.0
+
+To confirm that the tagging was correctly done, check the repo's [releases](https://github.com/eclipse-theia/theia/releases) page and confirm the release just done is listed there.
+
+## Announce release is done
+
+- Update the forum release post to announce that the release is done.
