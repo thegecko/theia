@@ -38,6 +38,7 @@ const webpack = require('webpack');
 const yargs = require('yargs');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const CircularDependencyPlugin = require('circular-dependency-plugin');
+const CompressionPlugin = require('compression-webpack-plugin')
 
 const outputPath = path.resolve(__dirname, 'lib');
 const { mode }  = yargs.option('mode', {
@@ -178,10 +179,15 @@ module.exports = {
                 to: 'vs/language/html'
             }`)}
         ]),
+        // it should go after copy-plugin in order to compress monaco as well
+        new CompressionPlugin({
+            // enable reuse of compressed artifacts for incremental development
+            cache: development
+        }),
         new CircularDependencyPlugin({
             exclude: /(node_modules|examples)\\/./,
             failOnError: false // https://github.com/nodejs/readable-stream/issues/280#issuecomment-297076462
-        }),
+        })
     ],
     stats: {
         warnings: true
