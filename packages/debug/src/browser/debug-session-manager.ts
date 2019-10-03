@@ -413,7 +413,7 @@ export class DebugSessionManager {
         }
 
         if (!taskInfo) {
-            return this.doPostTaskAction(`Could not find the task '${taskName}'.`);
+            return this.doPostTaskAction(`Could not run the task '${taskName}'.`);
         }
 
         const code = await this.taskService.getExitCode(taskInfo.taskId);

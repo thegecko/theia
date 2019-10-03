@@ -429,9 +429,9 @@ export class TaskService implements TaskConfigurationClient {
         return;
     }
 
-    async runWorkspaceTask(workspaceFolderUri: string | undefined, displayName: string): Promise<TaskInfo | undefined> {
+    async runWorkspaceTask(workspaceFolderUri: string | undefined, taskName: string): Promise<TaskInfo | undefined> {
         const tasks = await this.getWorkspaceTasks(workspaceFolderUri);
-        const task = tasks.filter(t => displayName !== this.taskNameResolver.resolve(t))[0];
+        const task = tasks.filter(t => taskName === this.taskNameResolver.resolve(t))[0];
         if (!task) {
             return undefined;
         }
@@ -441,7 +441,7 @@ export class TaskService implements TaskConfigurationClient {
 
     protected async getWorkspaceTasks(workspaceFolderUri: string | undefined): Promise<TaskConfiguration[]> {
         const tasks = await this.getTasks();
-        return tasks.filter(t => t._scope === workspaceFolderUri);
+        return tasks.filter(t => t._scope === workspaceFolderUri || t._scope === undefined);
     }
 
     private async removeProblemMarks(option?: RunTaskOption): Promise<void> {

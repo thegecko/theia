@@ -24,7 +24,7 @@ export class TaskNameResolver {
     protected taskDefinitionRegistry: TaskDefinitionRegistry;
 
     /**
-     * Returns human-readable task name to display.
+     * Returns task name to display.
      * It is aligned with VS Code.
      */
     resolve(task: TaskConfiguration): string {
@@ -32,6 +32,6 @@ export class TaskNameResolver {
             return `${task.source}: ${task.label}`;
         }
 
-        return task.label;
+        return task.label || `${task.type}: ${task.task}`;
     }
 }
