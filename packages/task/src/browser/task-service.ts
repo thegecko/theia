@@ -14,39 +14,41 @@
  * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
  ********************************************************************************/
 
-import { inject, injectable, named, postConstruct } from 'inversify';
-import { EditorManager } from '@theia/editor/lib/browser';
-import { ILogger } from '@theia/core/lib/common';
 import { ApplicationShell, FrontendApplication, WidgetManager } from '@theia/core/lib/browser';
-import { QuickPickService, QuickPickItem } from '@theia/core/lib/common/quick-pick-service';
-import { TaskResolverRegistry, TaskProviderRegistry } from './task-contribution';
-import { TERMINAL_WIDGET_FACTORY_ID, TerminalWidgetFactoryOptions } from '@theia/terminal/lib/browser/terminal-widget-impl';
+import { open, OpenerService } from '@theia/core/lib/browser/opener-service';
+import { ILogger } from '@theia/core/lib/common';
+import { MessageService } from '@theia/core/lib/common/message-service';
+import { Deferred } from '@theia/core/lib/common/promise-util';
+import { QuickPickItem, QuickPickService } from '@theia/core/lib/common/quick-pick-service';
+import URI from '@theia/core/lib/common/uri';
+import { EditorManager } from '@theia/editor/lib/browser';
+import { ProblemManager } from '@theia/markers/lib/browser/problem/problem-manager';
 import { TerminalService } from '@theia/terminal/lib/browser/base/terminal-service';
 import { TerminalWidget } from '@theia/terminal/lib/browser/base/terminal-widget';
-import { MessageService } from '@theia/core/lib/common/message-service';
-import { OpenerService, open } from '@theia/core/lib/browser/opener-service';
-import { ProblemManager } from '@theia/markers/lib/browser/problem/problem-manager';
-import { WorkspaceService } from '@theia/workspace/lib/browser/workspace-service';
+import { TerminalWidgetFactoryOptions, TERMINAL_WIDGET_FACTORY_ID } from '@theia/terminal/lib/browser/terminal-widget-impl';
 import { VariableResolverService } from '@theia/variable-resolver/lib/browser';
+import { WorkspaceService } from '@theia/workspace/lib/browser/workspace-service';
+import { inject, injectable, named, postConstruct } from 'inversify';
+import { Range } from 'vscode-languageserver-types';
 import {
     NamedProblemMatcher,
-    ProblemMatcher,
     ProblemMatchData,
+    ProblemMatcher,
+    RunTaskOption,
     TaskConfiguration,
     TaskCustomization,
     TaskExitedEvent,
     TaskInfo,
     TaskOutputProcessedEvent,
-    TaskServer,
-    RunTaskOption
+    TaskServer
 } from '../common';
 import { TaskWatcher } from '../common/task-watcher';
-import { TaskConfigurationClient, TaskConfigurations } from './task-configurations';
 import { ProvidedTaskConfigurations } from './provided-task-configurations';
+import { TaskConfigurationClient, TaskConfigurations } from './task-configurations';
+import { TaskProviderRegistry, TaskResolverRegistry } from './task-contribution';
 import { TaskDefinitionRegistry } from './task-definition-registry';
+import { TaskNameResolver } from './task-name-resolver';
 import { ProblemMatcherRegistry } from './task-problem-matcher-registry';
-import { Range } from 'vscode-languageserver-types';
-import URI from '@theia/core/lib/common/uri';
 
 export interface QuickPickProblemMatcherItem {
     problemMatchers: NamedProblemMatcher[] | undefined;
@@ -61,6 +63,10 @@ export class TaskService implements TaskConfigurationClient {
      */
     protected lastTask: { source: string, taskLabel: string } | undefined = undefined;
     protected cachedRecentTasks: TaskConfiguration[] = [];
+    protected runningTasks = new Map<number, {
+        exitCode: Deferred<number | undefined>,
+        terminateSignal: Deferred<string | undefined>
+    }>();
 
     @inject(FrontendApplication)
     protected readonly app: FrontendApplication;
@@ -119,6 +125,9 @@ export class TaskService implements TaskConfigurationClient {
     @inject(OpenerService)
     protected readonly openerService: OpenerService;
 
+    @inject(TaskNameResolver)
+    protected readonly taskNameResolver: TaskNameResolver;
+
     /**
      * @deprecated To be removed in 0.5.0
      */
@@ -129,14 +138,16 @@ export class TaskService implements TaskConfigurationClient {
     protected init(): void {
         // notify user that task has started
         this.taskWatcher.onTaskCreated((event: TaskInfo) => {
-            if (this.isEventForThisClient(event.ctx)) {
-                const task = event.config;
-                let taskIdentifier = event.taskId.toString();
-                if (task) {
-                    taskIdentifier = !!this.taskDefinitionRegistry.getDefinition(task) ? `${task._source}: ${task.label}` : `${task.type}: ${task.label}`;
-                }
-                this.messageService.info(`Task ${taskIdentifier} has been started`);
+            if (!this.isEventForThisClient(event.ctx)) {
+                return;
             }
+            this.runningTasks.set(event.taskId, { exitCode: new Deferred<number | undefined>(), terminateSignal: new Deferred<string | undefined>() });
+            const task = event.config;
+            let taskIdentifier = event.taskId.toString();
+            if (task) {
+                taskIdentifier = !!this.taskDefinitionRegistry.getDefinition(task) ? `${task._source}: ${task.label}` : `${task.type}: ${task.label}`;
+            }
+            this.messageService.info(`Task ${taskIdentifier} has been started`);
         });
 
         this.taskWatcher.onOutputProcessed((event: TaskOutputProcessedEvent) => {
@@ -173,6 +184,12 @@ export class TaskService implements TaskConfigurationClient {
             if (!this.isEventForThisClient(event.ctx)) {
                 return;
             }
+            if (!this.runningTasks.has(event.taskId)) {
+                this.runningTasks.set(event.taskId, { exitCode: new Deferred<number | undefined>(), terminateSignal: new Deferred<string | undefined>() });
+            }
+            this.runningTasks.get(event.taskId)!.exitCode.resolve(event.code);
+            this.runningTasks.get(event.taskId)!.terminateSignal.resolve(event.signal);
+            setTimeout(() => this.runningTasks.delete(event.taskId), 60 * 1000);
 
             const taskConfiguration = event.config;
             let taskIdentifier = event.taskId.toString();
@@ -401,15 +418,30 @@ export class TaskService implements TaskConfigurationClient {
         }
     }
 
-    async runTaskByLabel(taskLabel: string): Promise<boolean> {
+    async runTaskByLabel(taskLabel: string): Promise<TaskInfo | undefined> {
         const tasks: TaskConfiguration[] = await this.getTasks();
         for (const task of tasks) {
             if (task.label === taskLabel) {
-                await this.runTask(task);
-                return true;
+                return this.runTask(task);
             }
         }
-        return false;
+
+        return;
+    }
+
+    async runWorkspaceTask(workspaceFolderUri: string | undefined, displayName: string): Promise<TaskInfo | undefined> {
+        const tasks = await this.getWorkspaceTasks(workspaceFolderUri);
+        const task = tasks.filter(t => displayName !== this.taskNameResolver.resolve(t))[0];
+        if (!task) {
+            return undefined;
+        }
+
+        return this.runTask(task);
+    }
+
+    protected async getWorkspaceTasks(workspaceFolderUri: string | undefined): Promise<TaskConfiguration[]> {
+        const tasks = await this.getTasks();
+        return tasks.filter(t => t._scope === workspaceFolderUri);
     }
 
     private async removeProblemMarks(option?: RunTaskOption): Promise<void> {
@@ -571,5 +603,15 @@ export class TaskService implements TaskConfigurationClient {
             return;
         }
         this.logger.debug(`Task killed. Task id: ${id}`);
+    }
+
+    async getExitCode(id: number): Promise<number | undefined> {
+        const completedTask = this.runningTasks.get(id);
+        return completedTask && completedTask.exitCode.promise || undefined;
+    }
+
+    async getTerminateSignal(id: number): Promise<string | undefined> {
+        const completedTask = this.runningTasks.get(id);
+        return completedTask && completedTask.terminateSignal.promise || undefined;
     }
 }
