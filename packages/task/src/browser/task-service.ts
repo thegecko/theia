@@ -607,11 +607,11 @@ export class TaskService implements TaskConfigurationClient {
 
     async getExitCode(id: number): Promise<number | undefined> {
         const completedTask = this.runningTasks.get(id);
-        return completedTask && completedTask.exitCode.promise || undefined;
+        return completedTask && completedTask.exitCode.promise;
     }
 
     async getTerminateSignal(id: number): Promise<string | undefined> {
         const completedTask = this.runningTasks.get(id);
-        return completedTask && completedTask.terminateSignal.promise || undefined;
+        return completedTask && completedTask.terminateSignal.promise;
     }
 }
