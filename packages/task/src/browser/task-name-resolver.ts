@@ -32,6 +32,7 @@ export class TaskNameResolver {
             return `${task.source}: ${task.label}`;
         }
 
+        // it is a hack, when task is customized but extension is absent
         return task.label || `${task.type}: ${task.task}`;
     }
 }
