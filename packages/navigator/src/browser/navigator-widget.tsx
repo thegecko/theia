@@ -126,6 +126,16 @@ export class FileNavigatorWidget extends FileTreeWidget {
                     const opener = await this.openerService.getOpener(fileUri);
                     opener.open(fileUri);
                 });
+            } else if (dataTransfer) {
+                const data = dataTransfer.getData('theia-file-transfer');
+                if (data) {
+                    const files: string[] = JSON.parse(data);
+                    files.forEach(async filePath => {
+                        const fileUri = new URI(filePath);
+                        const opener = await this.openerService.getOpener(fileUri);
+                        opener.open(fileUri);
+                    });
+                }
             }
         });
         const handler = (e: DragEvent) => {

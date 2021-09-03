@@ -22,7 +22,7 @@ import { UriSelection } from '@theia/core/lib/common/selection';
 import { isCancelled } from '@theia/core/lib/common/cancellation';
 import { ContextMenuRenderer, NodeProps, TreeProps, TreeNode, CompositeTreeNode, TreeViewWelcomeWidget } from '@theia/core/lib/browser';
 import { FileUploadService } from '../file-upload-service';
-import { DirNode, FileStatNode, FileStatNodeData } from './file-tree';
+import { DirNode, FileNode, FileStatNode, FileStatNodeData } from './file-tree';
 import { FileTreeModel } from './file-tree-model';
 import { IconThemeService } from '@theia/core/lib/browser/icon-theme-service';
 import { FileStat, FileType } from '../../common/files';
@@ -124,6 +124,11 @@ export class FileTreeWidget extends TreeViewWelcomeWidget {
             dragImage.textContent = label;
             document.body.appendChild(dragImage);
             event.dataTransfer.setDragImage(dragImage, -10, -10);
+            const filesList: string[] = [];
+            selectedNodes.filter(FileNode.is).filter(n => n.fileStat.isFile).forEach(n => {
+                filesList.push(n.uri.toString());
+            });
+            event.dataTransfer.setData('theia-file-transfer', JSON.stringify(filesList));
             setTimeout(() => document.body.removeChild(dragImage), 0);
         }
     }
