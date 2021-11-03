@@ -18,11 +18,11 @@ const puppeteer = require('puppeteer');
 const fs = require('fs');
 const fsExtra = require('fs-extra');
 const resolve = require('path').resolve;
+const { measure, delay } = require('./common-performance');
+
 const workspacePath = resolve('./workspace');
 const profilesPath = './profiles/';
-
 const lcp = 'Largest Contentful Paint (LCP)';
-const performanceTag = braceText('Performance');
 
 let name = 'StartupPerformance';
 let url = 'http://localhost:3000/#' + workspacePath;
@@ -67,9 +67,9 @@ let runs = 10;
 })();
 
 async function measurePerformance(name, url, folder, headless, runs) {
-    const durations = [];
-    for (let i = 0; i < runs; i++) {
-        const runNr = i + 1;
+
+    /** @type import('./common-performance').TestFunction */
+    const testScenario = async (runNr) => {
         const browser = await puppeteer.launch({ headless: headless });
         const page = await browser.newPage();
 
@@ -85,33 +85,10 @@ async function measurePerformance(name, url, folder, headless, runs) {
 
         await browser.close();
 
-        const time = await analyzeStartup(file)
-        durations.push(time);
-        logDuration(name, runNr, lcp, time.toFixed(3), runs > 1);
-    }
+        return file;
+    };
 
-    if (runs > 1) {
-        const mean = calculateMean(durations);
-        logDuration(name, 'MEAN', lcp, mean);
-        logDuration(name, 'STDEV', lcp, calculateStandardDeviation(mean, durations));
-    }
-}
-
-async function analyzeStartup(profilePath) {
-    let startEvent;
-    const tracing = JSON.parse(fs.readFileSync('./' + profilePath, 'utf8'));
-    const lcpEvents = tracing.traceEvents.filter(x => {
-        if (isStart(x)) {
-            startEvent = x;
-            return false;
-        }
-        return isLCP(x);
-    });
-
-    if (startEvent !== undefined) {
-        return duration(lcpEvents[lcpEvents.length - 1], startEvent);
-    }
-    throw new Error('Could not analyze startup');
+    measure(name, lcp, runs, testScenario, isStart, isLCP);
 }
 
 function isLCP(x) {
@@ -120,45 +97,6 @@ function isLCP(x) {
 
 function isStart(x) {
     return x.name === 'TracingStartedInBrowser';
-}
-
-function duration(event, startEvent) {
-    return (event.ts - startEvent.ts) / 1000000;
-}
-
-function logDuration(name, run, metric, duration, multipleRuns = true) {
-    let runText = '';
-    if (multipleRuns) {
-        runText = braceText(run);
-    }
-    console.log(performanceTag + braceText(name) + runText + ' ' + metric + ': ' + duration + ' seconds');
-}
-
-function calculateMean(array) {
-    let sum = 0;
-    array.forEach(x => {
-        sum += x;
-    });
-    return (sum / array.length).toFixed(3);
-};
-
-function calculateStandardDeviation(mean, array) {
-    let sumOfDiffsSquared = 0;
-    array.forEach(time => {
-        sumOfDiffsSquared += Math.pow((time - mean), 2)
-    });
-    const variance = sumOfDiffsSquared / array.length;
-    return Math.sqrt(variance).toFixed(3);
-}
-
-function braceText(text) {
-    return '[' + text + ']';
-}
-
-function delay(time) {
-    return new Promise(function (resolve) {
-        setTimeout(resolve, time)
-    });
 }
 
 async function waitForDeployed(url, maxTries, ms) {

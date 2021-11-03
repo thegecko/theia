@@ -1,0 +1,12 @@
+{
+  "startup_duration": 10,
+  "result_file": "./electron-trace.json",
+  "trace_config": {
+    "included_categories": [
+      "blink"
+    ],
+    "excluded_categories": [
+      "*"
+    ]
+  }
+}
