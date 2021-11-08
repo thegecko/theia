@@ -17,8 +17,9 @@
 const fs = require('fs');
 const fsx = require('fs-extra');
 const { resolve } = require('path');
-const { spawn } = require('child_process');
+const { spawn, ChildProcess } = require('child_process');
 const { measure, delay } = require('./common-performance');
+const traceConfig = require('./electron-trace-config.json');
 
 const basePath = resolve(__dirname, '../..');
 const electronExample = resolve(basePath, 'examples/electron');
@@ -28,9 +29,6 @@ let name = 'ElectronStartup';
 let condition = 'UI Ready';
 let traceFile = resolve(electronExample, 'electron-trace.json');
 let runs = 10;
-
-const traceConfigFile = resolve(__dirname, './electron-trace-config.json');
-const traceConfig = require('./electron-trace-config.json');
 
 (async () => {
     const args = require('yargs/yargs')(process.argv.slice(2)).argv;
@@ -44,10 +42,18 @@ const traceConfig = require('./electron-trace-config.json');
         runs = parseInt(args.runs.toString());
     }
 
+    // Verify that the application exists
+    const mainJS = resolve(electronExample, 'src-gen/frontend/index.html');
+    if (!fs.existsSync(mainJS)) {
+        console.error('Electron example app does not exist. Please build it before running this script.');
+        process.exit(1);
+    }
+
     await measurePerformance(name, traceFile, runs);
 })();
 
 async function measurePerformance(name, traceFile, runs) {
+    const traceConfigPath = resolve(__dirname, './electron-trace-config.json');
     let electron;
 
     function exitHandler(andExit = false) {
@@ -67,8 +73,8 @@ async function measurePerformance(name, traceFile, runs) {
     process.on('SIGTERM', exitHandler(true));
 
     /** @type import('./common-performance').TestFunction */
-    const testScenario = async (runNr) => {
-        electron = await launchElectron(traceConfigFile);
+    const testScenario = async () => {
+        electron = await launchElectron(traceConfigPath);
 
         // Wait long enough to be sure that tracing has finished
         await delay(traceConfig.startup_duration * 1000 * 3 / 2)
@@ -80,10 +86,24 @@ async function measurePerformance(name, traceFile, runs) {
     measure(name, condition, runs, testScenario, hasNonzeroTimestamp, isPreloadHidden);
 }
 
-async function launchElectron(traceConfigFile) {
-    return spawn(theia,
-        ['start', '--plugins=local-dir:../../plugins', `--trace-config-file=${traceConfigFile}`],
-        { cwd: electronExample, detached: true });
+/**
+ * Launch the Electron app as a detached child process with tracing configured to start
+ * immediately upon launch. The child process is detached because otherwise the attempt
+ * to signal it to terminate when the test run is complete will not terminate the entire
+ * process tree but only the root `theia` process, leaving the electron app instance
+ * running until eventually this script itself exits.
+ * 
+ * @param {string} traceConfigPath the path to the tracing configuration file with which to initiate tracing
+ * @returns {Promise<ChildProcess>} the Electron child process, if successfully launched
+ */
+async function launchElectron(traceConfigPath) {
+    const workspace = resolve(electronExample, 'workspace');
+
+    const args = ['start', workspace, '--plugins=local-dir:../../plugins', `--trace-config-file=${traceConfigPath}`];
+    if (process.platform === 'linux') {
+        args.push('--headless');
+    }
+    return spawn(theia, args, { cwd: electronExample, detached: true });
 }
 
 function hasNonzeroTimestamp(traceEvent) {

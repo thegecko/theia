@@ -17,7 +17,7 @@
 const puppeteer = require('puppeteer');
 const fs = require('fs');
 const fsExtra = require('fs-extra');
-const resolve = require('path').resolve;
+const { resolve } = require('path');
 const { measure, delay } = require('./common-performance');
 
 const workspacePath = resolve('./workspace');
@@ -51,6 +51,13 @@ let runs = 10;
         if (args.headless.toString() === 'false') {
             headless = false;
         }
+    }
+
+    // Verify that the application exists
+    const mainJS = resolve(__dirname, '../../examples/browser/src-gen/frontend/index.html');
+    if (!fs.existsSync(mainJS)) {
+        console.error('Browser example app does not exist. Please build it before running this script.');
+        process.exit(1);
     }
 
     if (defaultUrl) { fsExtra.ensureDirSync(workspacePath); }
