@@ -26,7 +26,7 @@ const profilesPath = './profiles/';
 const electronExample = resolve(basePath, 'examples/electron');
 const theia = resolve(electronExample, 'node_modules/.bin/theia');
 
-let name = 'Electron Front-end Startup';
+let name = 'Electron Frontend Startup';
 let condition = 'UI Ready';
 let folder = 'electron';
 let runs = 10;

@@ -1,13 +1,16 @@
 # Performance measurements
 
-This directory contains a script that measures the performance of Theia.
-Currently the support is limited to measuring the `browser-app`'s startup time using the `Largest contentful paint (LCP)` value.
+This directory contains script that measure the start-up performance of the Theia front-end in both the browser and the Electron examples.
 
-## Running the script
+The `browser-app`'s start-up time is measured using the timestamp of the `Largest contentful paint (LCP)` value.
+
+The `electron-app`'s start-up time is measured using the timestamp of the hiding of the loading indicator node in the DOM. This is inferred from the last occurrence in the trace of a `HitTest` event on the `DIV` element that has the `theia-preload` and `theia-hidden` classes.
+
+## Running the browser start-up script
 
 ### Quick Start
 
-Execute `yarn run performance:startup` in the root directory to startup the backend and execute the script.
+Execute `yarn run performance:startup:browser` in the root directory to startup the backend and execute the script.
 
 ### Prerequisites
 
@@ -16,21 +19,48 @@ This can either be done with the `Launch Browser Backend` launch config or by ru
 
 ### Executing the script
 
-The script can be executed using `node measure-performance.js` in this directory.
+The script can be executed using `node browser-performance.js` in this directory.
 
 The script accepts the following optional parameters:
 
--   `--name`: Specify a name for the current measurement (default: `StartupPerformance`)
+-   `--name`: Specify a name for the current measurement (default: `Browser Frontend Startup`)
 -   `--url`: Point Theia to a url for example for specifying a specifc workspace (default: `http://localhost:3000/#/<pathToMeasurementScript>/workspace`)
--   `--folder`: Folder name for the generated tracing files in the `profiles` folder (default: `profile`)
+-   `--folder`: Folder name for the generated tracing files in the `profiles` folder (default: `browser`)
 -   `--runs`: Number of runs for the measurement (default: `10`)
 -   `--headless`: Boolean, if the tests should be run in headless mode (default: `true`)
 
 _**Note**: When multiple runs are specified the script will calculate the mean and the standard deviation of all values._
 
+## Running the Electron start-up script
+
+### Quick Start
+
+Execute `yarn run performance:startup:electron` in the root directory to execute the script.
+
+### Prerequisites
+
+To run the script the Theia Electron example needs to be built. In the root directory:
+
+```console
+$ yarn
+$ yarn electron build
+```
+
+### Executing the script
+
+The script can be executed using `node electron-performance.js` in this directory.
+
+The script accepts the following optional parameters:
+
+-   `--name`: Specify a name for the current measurement (default: `Electron Frontend Startup`)
+-   `--folder`: Folder name for the generated tracing files in the `profiles` folder (default: `electron`)
+-   `--runs`: Number of runs for the measurement (default: `10`)
+
+_**Note**: When multiple runs are specified the script will calculate the mean and the standard deviation of all values, except for any runs that failed to capture a measurement due to an exception._
+
 ## Measure impact on startup performance of extensions
 
-To measure the startup performance impact that extensions have on the application, another script is avaiable, which uses the measurements from the `measure-performance.js` script.
+To measure the startup performance impact that extensions have on the application, another script is available, which uses the measurements from the `browser-performance.js` script.
 The `extension-impact.js` script runs the measurement for a defined base application (`base-package.json` in this directory) and then measures the startup time when one of the defined extensions is added to the base application.
 The script will then print a table (in CSV format) to the console (and store it in a file) which contains the mean, standard deviation (Std Dev) and coefficient of variation (CV) for each extensions run.
 Additionally, each extensions entry will contain the difference to the base application time.

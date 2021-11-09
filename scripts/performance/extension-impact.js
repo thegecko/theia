@@ -181,7 +181,7 @@ async function calculateExtension(extensionQualifier) {
 
     logToConsole(`Measuring the startup time with ${extensionQualifier} ${runs} times. This may take a while.`);
     const output = await execCommand(
-        `concurrently --success first -k -r "cd scripts/performance && node measure-performance.js --name Startup --folder script --runs ${runs}${url ? ' --url ' + url : ''}" `
+        `concurrently --success first -k -r "cd scripts/performance && node browser-performance.js --name Startup --folder script --runs ${runs}${url ? ' --url ' + url : ''}" `
         + `"yarn --cwd examples/browser start | grep -v '.*'"`, { env: env, cwd: '../../', shell: true });
 
     const mean = parseFloat(getMeasurement(output, '[MEAN] Largest Contentful Paint (LCP):'));
