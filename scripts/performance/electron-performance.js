@@ -19,15 +19,16 @@ const fsx = require('fs-extra');
 const { resolve } = require('path');
 const { spawn, ChildProcess } = require('child_process');
 const { measure, delay } = require('./common-performance');
-const traceConfig = require('./electron-trace-config.json');
+const traceConfigTemplate = require('./electron-trace-config.json');
 
 const basePath = resolve(__dirname, '../..');
+const profilesPath = './profiles/';
 const electronExample = resolve(basePath, 'examples/electron');
 const theia = resolve(electronExample, 'node_modules/.bin/theia');
 
-let name = 'ElectronStartup';
+let name = 'Electron Front-end Startup';
 let condition = 'UI Ready';
-let traceFile = resolve(electronExample, 'electron-trace.json');
+let folder = 'electron';
 let runs = 10;
 
 (async () => {
@@ -35,8 +36,8 @@ let runs = 10;
     if (args.name) {
         name = args.name.toString();
     }
-    if (args.file) {
-        traceFile = args.file.toString();
+    if (args.folder) {
+        folder = args.folder.toString();
     }
     if (args.runs) {
         runs = parseInt(args.runs.toString());
@@ -49,14 +50,27 @@ let runs = 10;
         process.exit(1);
     }
 
-    await measurePerformance(name, traceFile, runs);
+    await measurePerformance();
 })();
 
-async function measurePerformance(name, traceFile, runs) {
-    const traceConfigPath = resolve(__dirname, './electron-trace-config.json');
-    let electron;
+async function measurePerformance() {
+    fsx.emptyDirSync(resolve(profilesPath, folder));
+    const traceConfigPath = resolve(profilesPath, folder, 'trace-config.json');
 
-    function exitHandler(andExit = false) {
+    /**
+     * Generate trace config from the template.
+     * @param {number} runNr
+     * @returns {string} the output trace file path
+     */
+    const traceConfigGenerator = (runNr) => {
+        const traceConfig = { ...traceConfigTemplate };
+        const traceFilePath = resolve(profilesPath, folder, `${runNr}.json`);
+        traceConfig.result_file = traceFilePath
+        fs.writeFileSync(traceConfigPath, JSON.stringify(traceConfig), 'utf-8');
+        return traceFilePath;
+    };
+
+    const exitHandler = (andExit = false) => {
         return () => {
             if (electron && !electron.killed) {
                 process.kill(-electron.pid, 'SIGINT');
@@ -72,12 +86,16 @@ async function measurePerformance(name, traceFile, runs) {
     process.on('SIGINT', exitHandler(true));
     process.on('SIGTERM', exitHandler(true));
 
+    let electron;
+
     /** @type import('./common-performance').TestFunction */
-    const testScenario = async () => {
+    const testScenario = async (runNr) => {
+        const traceFile = traceConfigGenerator(runNr);
         electron = await launchElectron(traceConfigPath);
 
-        // Wait long enough to be sure that tracing has finished
-        await delay(traceConfig.startup_duration * 1000 * 3 / 2)
+        // Wait long enough to be sure that tracing has finished. Kill the process group
+        // because the 'theia' child process was detached
+        await delay(traceConfigTemplate.startup_duration * 1_000 * 3 / 2)
             .then(() => process.kill(-electron.pid, 'SIGINT'));
         electron = undefined;
         return traceFile;
@@ -97,7 +115,8 @@ async function measurePerformance(name, traceFile, runs) {
  * @returns {Promise<ChildProcess>} the Electron child process, if successfully launched
  */
 async function launchElectron(traceConfigPath) {
-    const workspace = resolve(electronExample, 'workspace');
+    const workspace = resolve('./workspace');
+    fsx.ensureDirSync(workspace);
 
     const args = ['start', workspace, '--plugins=local-dir:../../plugins', `--trace-config-file=${traceConfigPath}`];
     if (process.platform === 'linux') {
@@ -107,13 +126,14 @@ async function launchElectron(traceConfigPath) {
 }
 
 function hasNonzeroTimestamp(traceEvent) {
-    return traceEvent.hasOwnProperty('ts')
+    return traceEvent.hasOwnProperty('ts') // The traces don't have explicit nulls or undefineds
         && traceEvent.ts > 0;
 }
 
 function isPreloadHidden(traceEvent) {
     return traceEvent.cat.includes('blink')
         && traceEvent.name === 'HitTest'
-        && traceEvent.args.hasOwnProperty('endData')
+        && traceEvent.args.hasOwnProperty('endData') // The traces don't have explicit nulls or undefineds
+        && traceEvent.args.endData.nodeName !== undefined
         && traceEvent.args.endData.nodeName.startsWith('DIV class=\'theia-preload theia-hidden\'');
 }

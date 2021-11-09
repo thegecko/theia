@@ -59,10 +59,16 @@ async function measure(name, scenario, runs, test, isStartEvent, isEndEvent) {
         const runNr = i + 1;
 
         const file = await test(runNr);
-        const time = await analyzeTrace(file, isStartEvent, isEndEvent);
+        let time;
 
-        durations.push(time);
-        logDuration(name, runNr, scenario, time, runs > 1);
+        try {
+            time = await analyzeTrace(file, isStartEvent, isEndEvent);
+
+            durations.push(time);
+            logDuration(name, runNr, scenario, time, runs > 1);
+        } catch (e) {
+            logException(name, runNr, scenario, e, runs > 1);
+        }
     }
 
     logSummary(name, scenario, durations);
@@ -136,6 +142,25 @@ function logDuration(name, run, metric, duration, multipleRuns = true) {
         runText = braceText(run);
     }
     console.log(performanceTag + braceText(name) + runText + ' ' + metric + ': ' + duration.toFixed(3) + ' seconds');
+}
+
+/**
+ * Log an `exception` in measurement of some scenario.
+ * 
+ * @param {string} name the performance script name
+ * @param {number|string} run the run index number, or some kind of aggregate like 'Total' or 'Avg'
+ * @param {string} metric the scenario that was measured
+ * @param {Error} exception the duration, in seconds, of the measured scenario
+ * @param {boolean=} multipleRuns whether the `run` logged is one of many being logged
+ */
+function logException(name, run, metric, exception, multipleRuns = true) {
+    let runText = '';
+    if (multipleRuns) {
+        runText = braceText(run);
+    }
+    console.log(performanceTag + braceText(name) + runText + ' ' + metric + ' failed to obtain a measurement: ' + exception.message);
+    console.error(`Failed to obtain a measurement. The most likely cause is that the performance trace file was incomplete because the script did not wait long enough for "${metric}" to finish.`);
+    console.error(exception);
 }
 
 /**

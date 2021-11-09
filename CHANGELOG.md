@@ -1,5 +1,7 @@
 # Change Log
 
+- [scripts] added Electron front-end start-up performance measurement script [#](https://github.com/eclipse-theia/theia/pull/#) - Contributed on behalf of STMicroelectronics
+
 ## v1.19.0 - 10/28/2021
 
 [1.19.0 Milestone](https://github.com/eclipse-theia/theia/milestone/25)

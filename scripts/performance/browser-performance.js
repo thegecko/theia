@@ -24,9 +24,9 @@ const workspacePath = resolve('./workspace');
 const profilesPath = './profiles/';
 const lcp = 'Largest Contentful Paint (LCP)';
 
-let name = 'StartupPerformance';
+let name = 'Browser Frontend Startup';
 let url = 'http://localhost:3000/#' + workspacePath;
-let folder = 'profile';
+let folder = 'browser';
 let headless = true;
 let runs = 10;
 
