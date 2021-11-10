@@ -18,6 +18,7 @@
 /**
  * An event in the performance trace (from the Chrome performance API).
  * @typedef TraceEvent
+ * @property {string} name the event name
  * @property {number} ts the timestamp, in microseconds since some time after host system start
  */
 
@@ -41,6 +42,7 @@
 const fs = require('fs');
 
 const performanceTag = braceText('Performance');
+const lcp = 'Largest Contentful Paint (LCP)';
 
 /**
  * Measure the performance of a `test` function implementing some `scenario` of interest.
@@ -117,6 +119,16 @@ async function analyzeTrace(profilePath, isStartEvent, isEndEvent) {
 }
 
 /**
+ * Query whether a trace `event` is a candidate for the Largest Contentful Paint.
+ * 
+ * @param {TraceEvent} event an event in the performance trace
+ * @returns whether the `event` is an LCP candidate
+ */
+function isLCP(event) {
+    return event.name === 'largestContentfulPaint::Candidate';
+}
+
+/**
  * Compute the duration, in seconds, to an `event` from a start event.
  * 
  * @param {TraceEvent} event the duration end event
@@ -159,7 +171,7 @@ function logException(name, run, metric, exception, multipleRuns = true) {
         runText = braceText(run);
     }
     console.log(performanceTag + braceText(name) + runText + ' ' + metric + ' failed to obtain a measurement: ' + exception.message);
-    console.error(`Failed to obtain a measurement. The most likely cause is that the performance trace file was incomplete because the script did not wait long enough for "${metric}" to finish.`);
+    console.error(`Failed to obtain a measurement. The most likely cause is that the performance trace file was incomplete because the script did not wait long enough for "${metric}".`);
     console.error(exception);
 }
 
@@ -218,5 +230,6 @@ module.exports = {
     measure, analyzeTrace,
     calculateMean, calculateStandardDeviation,
     duration, logDuration, logSummary,
-    braceText, delay
+    braceText, delay,
+    lcp, isLCP
 };

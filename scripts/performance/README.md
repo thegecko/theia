@@ -1,10 +1,8 @@
 # Performance measurements
 
-This directory contains script that measure the start-up performance of the Theia front-end in both the browser and the Electron examples.
+This directory contains scripts that measure the start-up performance of the Theia frontend in both the browser and the Electron examples.
 
-The `browser-app`'s start-up time is measured using the timestamp of the `Largest contentful paint (LCP)` value.
-
-The `electron-app`'s start-up time is measured using the timestamp of the hiding of the loading indicator node in the DOM. This is inferred from the last occurrence in the trace of a `HitTest` event on the `DIV` element that has the `theia-preload` and `theia-hidden` classes.
+The frontend's start-up time is measured using the timestamp of the last recorded `Largest contentful paint (LCP)` candidate metric.
 
 ## Running the browser start-up script
 
@@ -54,6 +52,7 @@ The script accepts the following optional parameters:
 
 -   `--name`: Specify a name for the current measurement (default: `Electron Frontend Startup`)
 -   `--folder`: Folder name for the generated tracing files in the `profiles` folder (default: `electron`)
+-   `--workspace`: Absolute path to a Theia workspace to open (default: an empty workspace folder)
 -   `--runs`: Number of runs for the measurement (default: `10`)
 
 _**Note**: When multiple runs are specified the script will calculate the mean and the standard deviation of all values, except for any runs that failed to capture a measurement due to an exception._

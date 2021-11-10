@@ -18,11 +18,10 @@ const puppeteer = require('puppeteer');
 const fs = require('fs');
 const fsExtra = require('fs-extra');
 const { resolve } = require('path');
-const { measure, delay } = require('./common-performance');
+const { delay, lcp, isLCP, measure } = require('./common-performance');
 
 const workspacePath = resolve('./workspace');
 const profilesPath = './profiles/';
-const lcp = 'Largest Contentful Paint (LCP)';
 
 let name = 'Browser Frontend Startup';
 let url = 'http://localhost:3000/#' + workspacePath;
@@ -32,8 +31,33 @@ let runs = 10;
 
 (async () => {
     let defaultUrl = true;
+    const yargs = require('yargs');
+    const args = yargs(process.argv.slice(2)).option('name', {
+        alias: 'n',
+        desc: 'A name for the test suite',
+        type: 'string',
+        default: name
+    }).option('folder', {
+        alias: 'f',
+        desc: 'Name of a folder within the "profiles" folder in which to collect trace logs',
+        type: 'string',
+        default: folder
+    }).option('runs', {
+        alias: 'r',
+        desc: 'The number of times to run the test',
+        type: 'number',
+        default: runs
+    }).option('url', {
+        alias: 'u',
+        desc: 'URL on which to open Theia in the browser (e.g., to specify a workspace)',
+        type: 'string',
+        default: url
+    }).option('headless', {
+        desc: 'Run in headless mode (do not open a browser)',
+        type: 'boolean',
+        default: headless
+    }).wrap(Math.min(120, yargs.terminalWidth())).argv;
 
-    const args = require('yargs/yargs')(process.argv.slice(2)).argv;
     if (args.name) {
         name = args.name.toString();
     }
@@ -47,10 +71,8 @@ let runs = 10;
     if (args.runs) {
         runs = parseInt(args.runs.toString());
     }
-    if (args.headless) {
-        if (args.headless.toString() === 'false') {
-            headless = false;
-        }
+    if (args.headless !== undefined && args.headless.toString() === 'false') {
+        headless = false;
     }
 
     // Verify that the application exists
@@ -96,10 +118,6 @@ async function measurePerformance(name, url, folder, headless, runs) {
     };
 
     measure(name, lcp, runs, testScenario, isStart, isLCP);
-}
-
-function isLCP(x) {
-    return x.name === 'largestContentfulPaint::Candidate';
 }
 
 function isStart(x) {

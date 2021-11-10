@@ -18,26 +18,59 @@ const fs = require('fs');
 const fsx = require('fs-extra');
 const { resolve } = require('path');
 const { spawn, ChildProcess } = require('child_process');
-const { measure, delay } = require('./common-performance');
+const { delay, lcp, isLCP, measure } = require('./common-performance');
 const traceConfigTemplate = require('./electron-trace-config.json');
+const { exit } = require('process');
 
 const basePath = resolve(__dirname, '../..');
-const profilesPath = './profiles/';
+const profilesPath = resolve(__dirname, './profiles/');
 const electronExample = resolve(basePath, 'examples/electron');
 const theia = resolve(electronExample, 'node_modules/.bin/theia');
 
 let name = 'Electron Frontend Startup';
-let condition = 'UI Ready';
 let folder = 'electron';
 let runs = 10;
+let workspace = resolve('./workspace');
 
 (async () => {
-    const args = require('yargs/yargs')(process.argv.slice(2)).argv;
+    let defaultWorkspace = true;
+
+    const yargs = require('yargs');
+    const args = yargs(process.argv.slice(2)).option('name', {
+        alias: 'n',
+        desc: 'A name for the test suite',
+        type: 'string',
+        default: name
+    }).option('folder', {
+        alias: 'f',
+        desc: 'Name of a folder within the "profiles" folder in which to collect trace logs',
+        type: 'string',
+        default: folder
+    }).option('runs', {
+        alias: 'r',
+        desc: 'The number of times to run the test',
+        type: 'number',
+        default: runs
+    }).option('workspace', {
+        alias: 'w',
+        desc: 'Path to a Theia workspace to open',
+        type: 'string',
+        default: workspace
+    }).wrap(Math.min(120, yargs.terminalWidth())).argv;
+
     if (args.name) {
         name = args.name.toString();
     }
     if (args.folder) {
         folder = args.folder.toString();
+    }
+    if (args.workspace) {
+        workspace = args.workspace.toString();
+        if (resolve(workspace) !== workspace) {
+            console.log('Workspace path must be an absolute path:', workspace);
+            exit(1);
+        }
+        defaultWorkspace = false;
     }
     if (args.runs) {
         runs = parseInt(args.runs.toString());
@@ -48,6 +81,11 @@ let runs = 10;
     if (!fs.existsSync(mainJS)) {
         console.error('Electron example app does not exist. Please build it before running this script.');
         process.exit(1);
+    }
+
+    if (defaultWorkspace) {
+        // Ensure that it exists
+        fsx.ensureDirSync(workspace);
     }
 
     await measurePerformance();
@@ -66,7 +104,7 @@ async function measurePerformance() {
         const traceConfig = { ...traceConfigTemplate };
         const traceFilePath = resolve(profilesPath, folder, `${runNr}.json`);
         traceConfig.result_file = traceFilePath
-        fs.writeFileSync(traceConfigPath, JSON.stringify(traceConfig), 'utf-8');
+        fs.writeFileSync(traceConfigPath, JSON.stringify(traceConfig, undefined, 2), 'utf-8');
         return traceFilePath;
     };
 
@@ -101,7 +139,7 @@ async function measurePerformance() {
         return traceFile;
     };
 
-    measure(name, condition, runs, testScenario, hasNonzeroTimestamp, isPreloadHidden);
+    measure(name, lcp, runs, testScenario, hasNonzeroTimestamp, isLCP);
 }
 
 /**
@@ -115,9 +153,6 @@ async function measurePerformance() {
  * @returns {Promise<ChildProcess>} the Electron child process, if successfully launched
  */
 async function launchElectron(traceConfigPath) {
-    const workspace = resolve('./workspace');
-    fsx.ensureDirSync(workspace);
-
     const args = ['start', workspace, '--plugins=local-dir:../../plugins', `--trace-config-file=${traceConfigPath}`];
     if (process.platform === 'linux') {
         args.push('--headless');
@@ -128,12 +163,4 @@ async function launchElectron(traceConfigPath) {
 function hasNonzeroTimestamp(traceEvent) {
     return traceEvent.hasOwnProperty('ts') // The traces don't have explicit nulls or undefineds
         && traceEvent.ts > 0;
-}
-
-function isPreloadHidden(traceEvent) {
-    return traceEvent.cat.includes('blink')
-        && traceEvent.name === 'HitTest'
-        && traceEvent.args.hasOwnProperty('endData') // The traces don't have explicit nulls or undefineds
-        && traceEvent.args.endData.nodeName !== undefined
-        && traceEvent.args.endData.nodeName.startsWith('DIV class=\'theia-preload theia-hidden\'');
 }
