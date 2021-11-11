@@ -134,7 +134,7 @@ async function measurePerformance() {
         // Wait long enough to be sure that tracing has finished. Kill the process group
         // because the 'theia' child process was detached
         await delay(traceConfigTemplate.startup_duration * 1_000 * 3 / 2)
-            .then(() => process.kill(-electron.pid, 'SIGINT'));
+            .then(() => electron.exitCode !== null || process.kill(-electron.pid, 'SIGINT'));
         electron = undefined;
         return traceFile;
     };

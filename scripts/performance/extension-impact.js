@@ -110,7 +110,7 @@ async function exitHandler() {
 async function extensionImpact(extensions) {
     logToFile(`Extension Name, Mean (${runs} runs) (in s), Std Dev (in s), CV (%), Delta (in s)`);
     if (baseTime === undefined) {
-        calculateExtension(undefined);
+        await calculateExtension(undefined);
     } else {
         log(`Base Theia (provided), ${baseTime}, -, -, -`);
     }
