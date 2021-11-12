@@ -131,6 +131,9 @@ async function measurePerformance() {
         const traceFile = traceConfigGenerator(runNr);
         electron = await launchElectron(traceConfigPath);
 
+        // Uncomment this to see why the child process terminates early when driven by extension-impact.js
+        // electron.stderr.on('data', data => console.error(data.toString()));
+
         // Wait long enough to be sure that tracing has finished. Kill the process group
         // because the 'theia' child process was detached
         await delay(traceConfigTemplate.startup_duration * 1_000 * 3 / 2)
