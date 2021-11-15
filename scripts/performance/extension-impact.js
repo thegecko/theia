@@ -157,6 +157,9 @@ function preparePackageTemplate() {
         .replace(/\{\{app\}\}/g, hostApp)
         .replace(/\{\{version\}\}/g, version);
     basePackage = JSON.parse(content);
+    if (hostApp === 'electron') {
+        basePackage.dependencies['@theia/electron'] = version;
+    }
     return basePackage;
 }
 
