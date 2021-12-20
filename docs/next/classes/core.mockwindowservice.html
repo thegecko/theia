@@ -99,9 +99,11 @@
 						<section class="tsd-index-section ">
 							<h3>Methods</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="core.mockwindowservice.html#canunload" class="tsd-kind-icon">can<wbr>Unload</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="core.mockwindowservice.html#issafetoshutdown" class="tsd-kind-icon">is<wbr>Safe<wbr>ToShut<wbr>Down</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="core.mockwindowservice.html#opennewdefaultwindow" class="tsd-kind-icon">open<wbr>New<wbr>Default<wbr>Window</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="core.mockwindowservice.html#opennewwindow" class="tsd-kind-icon">open<wbr>New<wbr>Window</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="core.mockwindowservice.html#reload" class="tsd-kind-icon">reload</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="core.mockwindowservice.html#setsafetoshutdown" class="tsd-kind-icon">set<wbr>Safe<wbr>ToShut<wbr>Down</a></li>
 							</ul>
 						</section>
 					</div>
@@ -136,7 +138,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/eclipsesource/theia/blob/f09fc1a41/packages/core/src/browser/window/test/mock-window-service.ts#L25">packages/core/src/browser/window/test/mock-window-service.ts:25</a></li>
+									<li>Defined in <a href="https://github.com/eclipsesource/theia/blob/b1778c39b/packages/core/src/browser/window/test/mock-window-service.ts#L27">packages/core/src/browser/window/test/mock-window-service.ts:27</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <a href="../interfaces/core.event-2.html" class="tsd-signature-type" data-tsd-kind="Interface">Event</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
@@ -147,20 +149,20 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Methods</h2>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-					<a name="canunload" class="tsd-anchor"></a>
-					<h3>can<wbr>Unload</h3>
+					<a name="issafetoshutdown" class="tsd-anchor"></a>
+					<h3>is<wbr>Safe<wbr>ToShut<wbr>Down</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">can<wbr>Unload<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
+						<li class="tsd-signature tsd-kind-icon">is<wbr>Safe<wbr>ToShut<wbr>Down<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
-								<p>Implementation of WindowService.canUnload</p>
+								<p>Implementation of WindowService.isSafeToShutDown</p>
 								<ul>
-									<li>Defined in <a href="https://github.com/eclipsesource/theia/blob/f09fc1a41/packages/core/src/browser/window/test/mock-window-service.ts#L24">packages/core/src/browser/window/test/mock-window-service.ts:24</a></li>
+									<li>Defined in <a href="https://github.com/eclipsesource/theia/blob/b1778c39b/packages/core/src/browser/window/test/mock-window-service.ts#L25">packages/core/src/browser/window/test/mock-window-service.ts:25</a></li>
 								</ul>
 							</aside>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">&gt;</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -175,7 +177,7 @@
 							<aside class="tsd-sources">
 								<p>Implementation of WindowService.openNewDefaultWindow</p>
 								<ul>
-									<li>Defined in <a href="https://github.com/eclipsesource/theia/blob/f09fc1a41/packages/core/src/browser/window/test/mock-window-service.ts#L23">packages/core/src/browser/window/test/mock-window-service.ts:23</a></li>
+									<li>Defined in <a href="https://github.com/eclipsesource/theia/blob/b1778c39b/packages/core/src/browser/window/test/mock-window-service.ts#L23">packages/core/src/browser/window/test/mock-window-service.ts:23</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -193,10 +195,46 @@
 							<aside class="tsd-sources">
 								<p>Implementation of WindowService.openNewWindow</p>
 								<ul>
-									<li>Defined in <a href="https://github.com/eclipsesource/theia/blob/f09fc1a41/packages/core/src/browser/window/test/mock-window-service.ts#L22">packages/core/src/browser/window/test/mock-window-service.ts:22</a></li>
+									<li>Defined in <a href="https://github.com/eclipsesource/theia/blob/b1778c39b/packages/core/src/browser/window/test/mock-window-service.ts#L22">packages/core/src/browser/window/test/mock-window-service.ts:22</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">undefined</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="reload" class="tsd-anchor"></a>
+					<h3>reload</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">reload<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Implementation of WindowService.reload</p>
+								<ul>
+									<li>Defined in <a href="https://github.com/eclipsesource/theia/blob/b1778c39b/packages/core/src/browser/window/test/mock-window-service.ts#L24">packages/core/src/browser/window/test/mock-window-service.ts:24</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="setsafetoshutdown" class="tsd-anchor"></a>
+					<h3>set<wbr>Safe<wbr>ToShut<wbr>Down</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">set<wbr>Safe<wbr>ToShut<wbr>Down<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Implementation of WindowService.setSafeToShutDown</p>
+								<ul>
+									<li>Defined in <a href="https://github.com/eclipsesource/theia/blob/b1778c39b/packages/core/src/browser/window/test/mock-window-service.ts#L26">packages/core/src/browser/window/test/mock-window-service.ts:26</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -248,7 +286,7 @@
 								<a href="../modules/core.cancellationtoken-1.html">Cancellation<wbr>Token</a>
 							</li>
 							<li class=" tsd-kind-namespace tsd-parent-kind-module">
-								<a href="../modules/core.color.html">Color</a>
+								<a href="../modules/core.color-1.html">Color</a>
 							</li>
 							<li class=" tsd-kind-namespace tsd-parent-kind-module">
 								<a href="../modules/core.command-1.html">Command</a>
@@ -276,6 +314,9 @@
 							</li>
 							<li class=" tsd-kind-namespace tsd-parent-kind-module">
 								<a href="../modules/core.decoratedtreenode-2.html">Decorated<wbr>Tree<wbr>Node</a>
+							</li>
+							<li class=" tsd-kind-namespace tsd-parent-kind-module">
+								<a href="../modules/core.decorationstyle-1.html">Decoration<wbr>Style</a>
 							</li>
 							<li class=" tsd-kind-namespace tsd-parent-kind-module">
 								<a href="../modules/core.defaultjsonschemacontribution.html">Default<wbr>Json<wbr>Schema<wbr>Contribution</a>
@@ -350,16 +391,16 @@
 								<a href="../modules/core.iterators-2.html">Iterators</a>
 							</li>
 							<li class=" tsd-kind-namespace tsd-parent-kind-module">
-								<a href="../modules/core.key-3.html">Key</a>
+								<a href="../modules/core.key-4.html">Key</a>
 							</li>
 							<li class=" tsd-kind-namespace tsd-parent-kind-module">
-								<a href="../modules/core.keycode-3.html">Key<wbr>Code</a>
+								<a href="../modules/core.keycode-4.html">Key<wbr>Code</a>
 							</li>
 							<li class=" tsd-kind-namespace tsd-parent-kind-module">
-								<a href="../modules/core.keymodifier-3.html">Key<wbr>Modifier</a>
+								<a href="../modules/core.keymodifier-4.html">Key<wbr>Modifier</a>
 							</li>
 							<li class=" tsd-kind-namespace tsd-parent-kind-module">
-								<a href="../modules/core.keysequence-3.html">Key<wbr>Sequence</a>
+								<a href="../modules/core.keysequence-4.html">Key<wbr>Sequence</a>
 							</li>
 							<li class=" tsd-kind-namespace tsd-parent-kind-module">
 								<a href="../modules/core.keybinding-1.html">Keybinding</a>
@@ -377,7 +418,7 @@
 								<a href="../modules/core.keyboardcommands-2.html">Keyboard<wbr>Commands</a>
 							</li>
 							<li class=" tsd-kind-namespace tsd-parent-kind-module">
-								<a href="../modules/core.keysorkeycodes-3.html">Keys<wbr>OrKey<wbr>Codes</a>
+								<a href="../modules/core.keysorkeycodes-4.html">Keys<wbr>OrKey<wbr>Codes</a>
 							</li>
 							<li class=" tsd-kind-namespace tsd-parent-kind-module">
 								<a href="../modules/core.labelicon.html">Label<wbr>Icon</a>
@@ -416,6 +457,9 @@
 								<a href="../modules/core.os-1.html">OS</a>
 							</li>
 							<li class=" tsd-kind-namespace tsd-parent-kind-module">
+								<a href="../modules/core.onwillstopaction-1.html">On<wbr>Will<wbr>Stop<wbr>Action</a>
+							</li>
+							<li class=" tsd-kind-namespace tsd-parent-kind-module">
 								<a href="../modules/core.overridepreferencename-2.html">Override<wbr>Preference<wbr>Name</a>
 							</li>
 							<li class=" tsd-kind-namespace tsd-parent-kind-module">
@@ -443,10 +487,10 @@
 								<a href="../modules/core.publishednodepackage.html">Published<wbr>Node<wbr>Package</a>
 							</li>
 							<li class=" tsd-kind-namespace tsd-parent-kind-module">
-								<a href="../modules/core.quickpickitem-2.html">Quick<wbr>Pick<wbr>Item</a>
+								<a href="../modules/core.quickpickitem-3.html">Quick<wbr>Pick<wbr>Item</a>
 							</li>
 							<li class=" tsd-kind-namespace tsd-parent-kind-module">
-								<a href="../modules/core.quickpickseparator-2.html">Quick<wbr>Pick<wbr>Separator</a>
+								<a href="../modules/core.quickpickseparator-3.html">Quick<wbr>Pick<wbr>Separator</a>
 							</li>
 							<li class=" tsd-kind-namespace tsd-parent-kind-module">
 								<a href="../modules/core.rawextensionpackage.html">Raw<wbr>Extension<wbr>Package</a>
@@ -494,7 +538,7 @@
 								<a href="../modules/core.sidepanel-2.html">Side<wbr>Panel</a>
 							</li>
 							<li class=" tsd-kind-namespace tsd-parent-kind-module">
-								<a href="../modules/core.specialcases-3.html">Special<wbr>Cases</a>
+								<a href="../modules/core.specialcases-4.html">Special<wbr>Cases</a>
 							</li>
 							<li class=" tsd-kind-namespace tsd-parent-kind-module">
 								<a href="../modules/core.statefulwidget-2.html">Stateful<wbr>Widget</a>
@@ -604,13 +648,19 @@
 								<a href="core.mockwindowservice.html#onunload" class="tsd-kind-icon">on<wbr>Unload</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="core.mockwindowservice.html#canunload" class="tsd-kind-icon">can<wbr>Unload</a>
+								<a href="core.mockwindowservice.html#issafetoshutdown" class="tsd-kind-icon">is<wbr>Safe<wbr>ToShut<wbr>Down</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="core.mockwindowservice.html#opennewdefaultwindow" class="tsd-kind-icon">open<wbr>New<wbr>Default<wbr>Window</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="core.mockwindowservice.html#opennewwindow" class="tsd-kind-icon">open<wbr>New<wbr>Window</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="core.mockwindowservice.html#reload" class="tsd-kind-icon">reload</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="core.mockwindowservice.html#setsafetoshutdown" class="tsd-kind-icon">set<wbr>Safe<wbr>ToShut<wbr>Down</a>
 							</li>
 						</ul>
 					</li>
