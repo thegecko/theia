@@ -3,7 +3,10 @@
 
 [1.22.0 Milestone](https://github.com/eclipse-theia/theia/milestone/30)
 
+- [scripts] integrated start-up performance scripts into nightly master build [#10463](https://github.com/eclipse-theia/theia/pull/10463) - Contributed on behalf of STMicroelectronics
+
 <a name="breaking_changes_1.22.0">[Breaking Changes:](#breaking_changes_1.22.0)</a>
+
 - [core] Removed `MarkdownRenderer` class [#10589](https://github.com/eclipse-theia/theia/pull/10589)
 - [core] `ContextKeyService` is now an interface. Extenders should extend `ContextKeyServiceDummyImpl` [#10546](https://github.com/eclipse-theia/theia/pull/10546)
 - [plugin] Removed deprecated fields `id` and `label` from `theia.Command` [#10512](https://github.com/eclipse-theia/theia/pull/10512)
