@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>MarkdownRenderer | Theia TypeDoc</title>
+	<title>ContextKeyServiceDummyImpl | Theia TypeDoc</title>
 	<meta name="description" content="Documentation for Theia TypeDoc">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -56,10 +56,10 @@
 					<a href="../modules/core.html">core</a>
 				</li>
 				<li>
-					<a href="core.markdownrenderer-1.html">MarkdownRenderer</a>
+					<a href="core.contextkeyservicedummyimpl.html">ContextKeyServiceDummyImpl</a>
 				</li>
 			</ul>
-			<h1>Class MarkdownRenderer</h1>
+			<h1>Class ContextKeyServiceDummyImpl</h1>
 		</div>
 	</div>
 </header>
@@ -70,8 +70,14 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">MarkdownRenderer</span>
+						<span class="target">ContextKeyServiceDummyImpl</span>
 					</li>
+				</ul>
+			</section>
+			<section class="tsd-panel">
+				<h3>Implements</h3>
+				<ul class="tsd-hierarchy">
+					<li><a href="../modules/core.html#contextkeyservice-1" class="tsd-signature-type" data-tsd-kind="Variable">ContextKeyService</a></li>
 				</ul>
 			</section>
 			<section class="tsd-panel-group tsd-index-group">
@@ -81,24 +87,27 @@
 						<section class="tsd-index-section ">
 							<h3>Constructors</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-constructor tsd-parent-kind-class"><a href="core.markdownrenderer-1.html#constructor" class="tsd-kind-icon">constructor</a></li>
+								<li class="tsd-kind-constructor tsd-parent-kind-class"><a href="core.contextkeyservicedummyimpl.html#constructor" class="tsd-kind-icon">constructor</a></li>
 							</ul>
 						</section>
-						<section class="tsd-index-section tsd-is-private-protected">
+						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected"><a href="core.markdownrenderer-1.html#callbacks" class="tsd-kind-icon">callbacks</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected"><a href="core.markdownrenderer-1.html#engine" class="tsd-kind-icon">engine</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="core.contextkeyservicedummyimpl.html#ondidchange" class="tsd-kind-icon">on<wbr>Did<wbr>Change</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected"><a href="core.contextkeyservicedummyimpl.html#ondidchangeemitter" class="tsd-kind-icon">on<wbr>Did<wbr>Change<wbr>Emitter</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
 							<h3>Methods</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter"><a href="core.markdownrenderer-1.html#modify" class="tsd-kind-icon">modify</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="core.markdownrenderer-1.html#render" class="tsd-kind-icon">render</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="core.markdownrenderer-1.html#renderinline" class="tsd-kind-icon">render<wbr>Inline</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-protected"><a href="core.markdownrenderer-1.html#renderinternal" class="tsd-kind-icon">render<wbr>Internal</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-protected"><a href="core.markdownrenderer-1.html#sanitizehtml" class="tsd-kind-icon">sanitize<wbr>Html</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter"><a href="core.contextkeyservicedummyimpl.html#createkey" class="tsd-kind-icon">create<wbr>Key</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="core.contextkeyservicedummyimpl.html#createscoped" class="tsd-kind-icon">create<wbr>Scoped</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="core.contextkeyservicedummyimpl.html#dispose" class="tsd-kind-icon">dispose</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-protected"><a href="core.contextkeyservicedummyimpl.html#firedidchange" class="tsd-kind-icon">fire<wbr>Did<wbr>Change</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="core.contextkeyservicedummyimpl.html#match" class="tsd-kind-icon">match</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="core.contextkeyservicedummyimpl.html#parsekeys" class="tsd-kind-icon">parse<wbr>Keys</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="core.contextkeyservicedummyimpl.html#setcontext" class="tsd-kind-icon">set<wbr>Context</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter"><a href="core.contextkeyservicedummyimpl.html#with" class="tsd-kind-icon">with</a></li>
 							</ul>
 						</section>
 					</div>
@@ -110,45 +119,37 @@
 					<a name="constructor" class="tsd-anchor"></a>
 					<h3>constructor</h3>
 					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">new <wbr>Markdown<wbr>Renderer<span class="tsd-signature-symbol">(</span>engine<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">MarkdownIt</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="core.markdownrenderer-1.html" class="tsd-signature-type" data-tsd-kind="Class">MarkdownRenderer</a></li>
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Context<wbr>Key<wbr>Service<wbr>Dummy<wbr>Impl<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="core.contextkeyservicedummyimpl.html" class="tsd-signature-type" data-tsd-kind="Class">ContextKeyServiceDummyImpl</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in <a href="https://github.com/eclipsesource/theia/blob/17b419fdf/packages/core/src/browser/markdown-renderer.ts#L23">packages/core/src/browser/markdown-renderer.ts:23</a></li>
-								</ul>
 							</aside>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5><span class="tsd-flag ts-flagOptional">Optional</span> engine: <span class="tsd-signature-type">MarkdownIt</span></h5>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <a href="core.markdownrenderer-1.html" class="tsd-signature-type" data-tsd-kind="Class">MarkdownRenderer</a></h4>
+							<h4 class="tsd-returns-title">Returns <a href="core.contextkeyservicedummyimpl.html" class="tsd-signature-type" data-tsd-kind="Class">ContextKeyServiceDummyImpl</a></h4>
 						</li>
 					</ul>
 				</section>
 			</section>
-			<section class="tsd-panel-group tsd-member-group tsd-is-private-protected">
+			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-protected">
-					<a name="callbacks" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagProtected">Protected</span> callbacks</h3>
-					<div class="tsd-signature tsd-kind-icon">callbacks<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Map</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">(</span>element<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Element</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Element</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = ...</span></div>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="ondidchange" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> on<wbr>Did<wbr>Change</h3>
+					<div class="tsd-signature tsd-kind-icon">on<wbr>Did<wbr>Change<span class="tsd-signature-symbol">:</span> <a href="../interfaces/core.event-2.html" class="tsd-signature-type" data-tsd-kind="Interface">Event</a><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/core.contextkeychangeevent.html" class="tsd-signature-type" data-tsd-kind="Interface">ContextKeyChangeEvent</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = ...</span></div>
 					<aside class="tsd-sources">
+						<p>Implementation of ContextKeyService.onDidChange</p>
 						<ul>
-							<li>Defined in <a href="https://github.com/eclipsesource/theia/blob/17b419fdf/packages/core/src/browser/markdown-renderer.ts#L23">packages/core/src/browser/markdown-renderer.ts:23</a></li>
+							<li>Defined in <a href="https://github.com/eclipsesource/theia/blob/8b3466971/packages/core/src/browser/context-key-service.ts#L80">packages/core/src/browser/context-key-service.ts:80</a></li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-protected">
-					<a name="engine" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagProtected">Protected</span> engine</h3>
-					<div class="tsd-signature tsd-kind-icon">engine<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">MarkdownIt</span></div>
+					<a name="ondidchangeemitter" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagProtected">Protected</span> <span class="tsd-flag ts-flagReadonly">Readonly</span> on<wbr>Did<wbr>Change<wbr>Emitter</h3>
+					<div class="tsd-signature tsd-kind-icon">on<wbr>Did<wbr>Change<wbr>Emitter<span class="tsd-signature-symbol">:</span> <a href="core.emitter-1.html" class="tsd-signature-type" data-tsd-kind="Class">Emitter</a><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/core.contextkeychangeevent.html" class="tsd-signature-type" data-tsd-kind="Interface">ContextKeyChangeEvent</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = ...</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/eclipsesource/theia/blob/17b419fdf/packages/core/src/browser/markdown-renderer.ts#L22">packages/core/src/browser/markdown-renderer.ts:22</a></li>
+							<li>Defined in <a href="https://github.com/eclipsesource/theia/blob/8b3466971/packages/core/src/browser/context-key-service.ts#L79">packages/core/src/browser/context-key-service.ts:79</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -156,155 +157,249 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Methods</h2>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter">
-					<a name="modify" class="tsd-anchor"></a>
-					<h3>modify</h3>
+					<a name="createkey" class="tsd-anchor"></a>
+					<h3>create<wbr>Key</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter">
-						<li class="tsd-signature tsd-kind-icon">modify&lt;K&gt;<span class="tsd-signature-symbol">(</span>tag<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">K</span>, callback<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>element<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">HTMLElementTagNameMap</span><span class="tsd-signature-symbol">[</span><span class="tsd-signature-type">K</span><span class="tsd-signature-symbol">]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Element</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="core.markdownrenderer-1.html" class="tsd-signature-type" data-tsd-kind="Class">MarkdownRenderer</a></li>
+						<li class="tsd-signature tsd-kind-icon">create<wbr>Key&lt;T&gt;<span class="tsd-signature-symbol">(</span>key<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, defaultValue<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/core.contextkey-1.html" class="tsd-signature-type" data-tsd-kind="Interface">ContextKey</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
+								<p>Implementation of ContextKeyService.createKey</p>
 								<ul>
-									<li>Defined in <a href="https://github.com/eclipsesource/theia/blob/17b419fdf/packages/core/src/browser/markdown-renderer.ts#L35">packages/core/src/browser/markdown-renderer.ts:35</a></li>
+									<li>Defined in <a href="https://github.com/eclipsesource/theia/blob/8b3466971/packages/core/src/browser/context-key-service.ts#L85">packages/core/src/browser/context-key-service.ts:85</a></li>
 								</ul>
 							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>Adds a modification callback that is applied to every element with the specified tag after rendering to HTML.</p>
-								</div>
-							</div>
 							<h4 class="tsd-type-parameters-title">Type parameters</h4>
 							<ul class="tsd-type-parameters">
 								<li>
-									<h4>K<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">&quot;object&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;input&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;progress&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;select&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;code&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;a&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;abbr&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;address&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;applet&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;area&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;article&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;aside&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;audio&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;b&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;base&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;basefont&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;bdi&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;bdo&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;blockquote&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;body&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;br&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;button&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;canvas&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;caption&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;cite&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;col&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;colgroup&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;data&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;datalist&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;dd&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;del&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;details&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;dfn&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;dialog&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;dir&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;div&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;dl&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;dt&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;em&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;embed&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;fieldset&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;figcaption&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;figure&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;font&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;footer&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;form&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;frame&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;frameset&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;h1&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;h2&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;h3&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;h4&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;h5&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;h6&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;head&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;header&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;hgroup&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;hr&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;html&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;i&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;iframe&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;img&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;ins&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;kbd&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;label&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;legend&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;li&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;link&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;main&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;map&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;mark&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;marquee&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;menu&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;meta&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;meter&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;nav&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;noscript&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;ol&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;optgroup&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;option&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;output&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;p&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;param&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;picture&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;pre&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;q&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;rp&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;rt&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;ruby&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;s&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;samp&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;script&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;section&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;slot&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;small&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;source&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;span&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;strong&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;style&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;sub&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;summary&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;sup&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;table&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;tbody&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;td&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;template&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;textarea&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;tfoot&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;th&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;thead&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;time&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;title&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;tr&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;track&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;u&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;ul&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;var&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;video&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;wbr&quot;</span></h4>
+									<h4>T</h4>
 								</li>
 							</ul>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>tag: <span class="tsd-signature-type">K</span></h5>
-									<div class="tsd-comment tsd-typography">
-										<p>The tag that this modification applies to.</p>
-									</div>
+									<h5>key: <span class="tsd-signature-type">string</span></h5>
 								</li>
 								<li>
-									<h5>callback: <span class="tsd-signature-symbol">(</span>element<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">HTMLElementTagNameMap</span><span class="tsd-signature-symbol">[</span><span class="tsd-signature-type">K</span><span class="tsd-signature-symbol">]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Element</span></h5>
-									<div class="tsd-comment tsd-typography">
-										<p>The modification to apply on every selected rendered element. Can either modify the element in place or return a new element.</p>
-									</div>
+									<h5>defaultValue: <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">T</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="../interfaces/core.contextkey-1.html" class="tsd-signature-type" data-tsd-kind="Interface">ContextKey</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="createscoped" class="tsd-anchor"></a>
+					<h3>create<wbr>Scoped</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">create<wbr>Scoped<span class="tsd-signature-symbol">(</span>target<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">HTMLElement</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../modules/core.html#contextkeyservice-1" class="tsd-signature-type" data-tsd-kind="Variable">ContextKeyService</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Implementation of ContextKeyService.createScoped</p>
+								<ul>
+									<li>Defined in <a href="https://github.com/eclipsesource/theia/blob/8b3466971/packages/core/src/browser/context-key-service.ts#L113">packages/core/src/browser/context-key-service.ts:113</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Details should implemented by an extension, e.g. by the monaco extension.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> target: <span class="tsd-signature-type">HTMLElement</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="../modules/core.html#contextkeyservice-1" class="tsd-signature-type" data-tsd-kind="Variable">ContextKeyService</a></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="dispose" class="tsd-anchor"></a>
+					<h3>dispose</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">dispose<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Implementation of ContextKeyService.dispose</p>
+								<ul>
+									<li>Defined in <a href="https://github.com/eclipsesource/theia/blob/8b3466971/packages/core/src/browser/context-key-service.ts#L122">packages/core/src/browser/context-key-service.ts:122</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-protected">
+					<a name="firedidchange" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagProtected">Protected</span> fire<wbr>Did<wbr>Change</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-protected">
+						<li class="tsd-signature tsd-kind-icon">fire<wbr>Did<wbr>Change<span class="tsd-signature-symbol">(</span>event<span class="tsd-signature-symbol">: </span><a href="../interfaces/core.contextkeychangeevent.html" class="tsd-signature-type" data-tsd-kind="Interface">ContextKeyChangeEvent</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/eclipsesource/theia/blob/8b3466971/packages/core/src/browser/context-key-service.ts#L81">packages/core/src/browser/context-key-service.ts:81</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>event: <a href="../interfaces/core.contextkeychangeevent.html" class="tsd-signature-type" data-tsd-kind="Interface">ContextKeyChangeEvent</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="match" class="tsd-anchor"></a>
+					<h3>match</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">match<span class="tsd-signature-symbol">(</span>expression<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, context<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">HTMLElement</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Implementation of ContextKeyService.match</p>
+								<ul>
+									<li>Defined in <a href="https://github.com/eclipsesource/theia/blob/8b3466971/packages/core/src/browser/context-key-service.ts#L91">packages/core/src/browser/context-key-service.ts:91</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>It should be implemented by an extension, e.g. by the monaco extension.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>expression: <span class="tsd-signature-type">string</span></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> context: <span class="tsd-signature-type">HTMLElement</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="parsekeys" class="tsd-anchor"></a>
+					<h3>parse<wbr>Keys</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">parse<wbr>Keys<span class="tsd-signature-symbol">(</span>expression<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Set</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Implementation of ContextKeyService.parseKeys</p>
+								<ul>
+									<li>Defined in <a href="https://github.com/eclipsesource/theia/blob/8b3466971/packages/core/src/browser/context-key-service.ts#L98">packages/core/src/browser/context-key-service.ts:98</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>It should be implemented by an extension, e.g. by the monaco extension.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>expression: <span class="tsd-signature-type">string</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Set</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="setcontext" class="tsd-anchor"></a>
+					<h3>set<wbr>Context</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">set<wbr>Context<span class="tsd-signature-symbol">(</span>key<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Implementation of ContextKeyService.setContext</p>
+								<ul>
+									<li>Defined in <a href="https://github.com/eclipsesource/theia/blob/8b3466971/packages/core/src/browser/context-key-service.ts#L120">packages/core/src/browser/context-key-service.ts:120</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Details should be implemented by an extension, e.g. by the monaco extension.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>key: <span class="tsd-signature-type">string</span></h5>
+								</li>
+								<li>
+									<h5>value: <span class="tsd-signature-type">unknown</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter">
+					<a name="with" class="tsd-anchor"></a>
+					<h3>with</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter">
+						<li class="tsd-signature tsd-kind-icon">with&lt;T&gt;<span class="tsd-signature-symbol">(</span>values<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Record</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">&gt;</span>, callback<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Implementation of ContextKeyService.with</p>
+								<ul>
+									<li>Defined in <a href="https://github.com/eclipsesource/theia/blob/8b3466971/packages/core/src/browser/context-key-service.ts#L106">packages/core/src/browser/context-key-service.ts:106</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Details should be implemented by an extension, e.g. by the monaco extension.
+									Callback must be synchronous.</p>
+								</div>
+							</div>
+							<h4 class="tsd-type-parameters-title">Type parameters</h4>
+							<ul class="tsd-type-parameters">
+								<li>
+									<h4>T</h4>
+								</li>
+							</ul>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>values: <span class="tsd-signature-type">Record</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">&gt;</span></h5>
+								</li>
+								<li>
+									<h5>callback: <span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">T</span></h5>
 									<ul class="tsd-parameters">
 										<li class="tsd-parameter-signature">
 											<ul class="tsd-signatures tsd-kind-type-literal">
-												<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>element<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">HTMLElementTagNameMap</span><span class="tsd-signature-symbol">[</span><span class="tsd-signature-type">K</span><span class="tsd-signature-symbol">]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Element</span></li>
+												<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span></li>
 											</ul>
 											<ul class="tsd-descriptions">
 												<li class="tsd-description">
-													<h4 class="tsd-parameters-title">Parameters</h4>
-													<ul class="tsd-parameters">
-														<li>
-															<h5>element: <span class="tsd-signature-type">HTMLElementTagNameMap</span><span class="tsd-signature-symbol">[</span><span class="tsd-signature-type">K</span><span class="tsd-signature-symbol">]</span></h5>
-														</li>
-													</ul>
-													<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Element</span></h4>
+													<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">T</span></h4>
 												</li>
 											</ul>
 										</li>
 									</ul>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <a href="core.markdownrenderer-1.html" class="tsd-signature-type" data-tsd-kind="Class">MarkdownRenderer</a></h4>
-						</li>
-					</ul>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-					<a name="render" class="tsd-anchor"></a>
-					<h3>render</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">render<span class="tsd-signature-symbol">(</span>markdown<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">HTMLElement</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in <a href="https://github.com/eclipsesource/theia/blob/17b419fdf/packages/core/src/browser/markdown-renderer.ts#L44">packages/core/src/browser/markdown-renderer.ts:44</a></li>
-								</ul>
-							</aside>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>markdown: <span class="tsd-signature-type">string</span></h5>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">HTMLElement</span></h4>
-						</li>
-					</ul>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-					<a name="renderinline" class="tsd-anchor"></a>
-					<h3>render<wbr>Inline</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">render<wbr>Inline<span class="tsd-signature-symbol">(</span>markdown<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">HTMLElement</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in <a href="https://github.com/eclipsesource/theia/blob/17b419fdf/packages/core/src/browser/markdown-renderer.ts#L48">packages/core/src/browser/markdown-renderer.ts:48</a></li>
-								</ul>
-							</aside>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>markdown: <span class="tsd-signature-type">string</span></h5>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">HTMLElement</span></h4>
-						</li>
-					</ul>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-protected">
-					<a name="renderinternal" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagProtected">Protected</span> render<wbr>Internal</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-protected">
-						<li class="tsd-signature tsd-kind-icon">render<wbr>Internal<span class="tsd-signature-symbol">(</span>renderedHtml<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">HTMLElement</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in <a href="https://github.com/eclipsesource/theia/blob/17b419fdf/packages/core/src/browser/markdown-renderer.ts#L52">packages/core/src/browser/markdown-renderer.ts:52</a></li>
-								</ul>
-							</aside>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>renderedHtml: <span class="tsd-signature-type">string</span></h5>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">HTMLElement</span></h4>
-						</li>
-					</ul>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-protected">
-					<a name="sanitizehtml" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagProtected">Protected</span> sanitize<wbr>Html</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-protected">
-						<li class="tsd-signature tsd-kind-icon">sanitize<wbr>Html<span class="tsd-signature-symbol">(</span>html<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">HTMLElement</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in <a href="https://github.com/eclipsesource/theia/blob/17b419fdf/packages/core/src/browser/markdown-renderer.ts#L71">packages/core/src/browser/markdown-renderer.ts:71</a></li>
-								</ul>
-							</aside>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>html: <span class="tsd-signature-type">string</span></h5>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">HTMLElement</span></h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">T</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -566,6 +661,9 @@
 								<a href="../modules/core.rawextensionpackage.html">Raw<wbr>Extension<wbr>Package</a>
 							</li>
 							<li class=" tsd-kind-namespace tsd-parent-kind-module">
+								<a href="../modules/core.rawkeybinding.html">Raw<wbr>Keybinding</a>
+							</li>
+							<li class=" tsd-kind-namespace tsd-parent-kind-module">
 								<a href="../modules/core.readable.html">Readable</a>
 							</li>
 							<li class=" tsd-kind-namespace tsd-parent-kind-module">
@@ -709,31 +807,40 @@
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-class tsd-parent-kind-module">
-						<a href="core.markdownrenderer-1.html" class="tsd-kind-icon">Markdown<wbr>Renderer</a>
+						<a href="core.contextkeyservicedummyimpl.html" class="tsd-kind-icon">Context<wbr>Key<wbr>Service<wbr>Dummy<wbr>Impl</a>
 						<ul>
 							<li class=" tsd-kind-constructor tsd-parent-kind-class">
-								<a href="core.markdownrenderer-1.html#constructor" class="tsd-kind-icon">constructor</a>
+								<a href="core.contextkeyservicedummyimpl.html#constructor" class="tsd-kind-icon">constructor</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="core.contextkeyservicedummyimpl.html#ondidchange" class="tsd-kind-icon">on<wbr>Did<wbr>Change</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-protected">
-								<a href="core.markdownrenderer-1.html#callbacks" class="tsd-kind-icon">callbacks</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-protected">
-								<a href="core.markdownrenderer-1.html#engine" class="tsd-kind-icon">engine</a>
+								<a href="core.contextkeyservicedummyimpl.html#ondidchangeemitter" class="tsd-kind-icon">on<wbr>Did<wbr>Change<wbr>Emitter</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter">
-								<a href="core.markdownrenderer-1.html#modify" class="tsd-kind-icon">modify</a>
+								<a href="core.contextkeyservicedummyimpl.html#createkey" class="tsd-kind-icon">create<wbr>Key</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="core.markdownrenderer-1.html#render" class="tsd-kind-icon">render</a>
+								<a href="core.contextkeyservicedummyimpl.html#createscoped" class="tsd-kind-icon">create<wbr>Scoped</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="core.markdownrenderer-1.html#renderinline" class="tsd-kind-icon">render<wbr>Inline</a>
+								<a href="core.contextkeyservicedummyimpl.html#dispose" class="tsd-kind-icon">dispose</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-protected">
-								<a href="core.markdownrenderer-1.html#renderinternal" class="tsd-kind-icon">render<wbr>Internal</a>
+								<a href="core.contextkeyservicedummyimpl.html#firedidchange" class="tsd-kind-icon">fire<wbr>Did<wbr>Change</a>
 							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-protected">
-								<a href="core.markdownrenderer-1.html#sanitizehtml" class="tsd-kind-icon">sanitize<wbr>Html</a>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="core.contextkeyservicedummyimpl.html#match" class="tsd-kind-icon">match</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="core.contextkeyservicedummyimpl.html#parsekeys" class="tsd-kind-icon">parse<wbr>Keys</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="core.contextkeyservicedummyimpl.html#setcontext" class="tsd-kind-icon">set<wbr>Context</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter">
+								<a href="core.contextkeyservicedummyimpl.html#with" class="tsd-kind-icon">with</a>
 							</li>
 						</ul>
 					</li>
@@ -760,6 +867,7 @@
 				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>
 				<li class="tsd-kind-class tsd-has-type-parameter"><span class="tsd-kind-icon">Class with type parameter</span></li>
 				<li class="tsd-kind-constructor tsd-parent-kind-class"><span class="tsd-kind-icon">Constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class"><span class="tsd-kind-icon">Property</span></li>
 				<li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li>
 			</ul>
 			<ul class="tsd-legend">
