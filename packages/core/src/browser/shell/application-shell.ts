@@ -34,10 +34,11 @@ import { FrontendApplicationStateService } from '../frontend-application-state';
 import { TabBarToolbarRegistry, TabBarToolbarFactory } from './tab-bar-toolbar';
 import { ContextKeyService } from '../context-key-service';
 import { Emitter } from '../../common/event';
-import { waitForRevealed, waitForClosed } from '../widgets';
+import { waitForRevealed, waitForClosed, ExtractableWidget } from '../widgets';
 import { CorePreferences } from '../core-preferences';
 import { BreadcrumbsRendererFactory } from '../breadcrumbs/breadcrumbs-renderer';
 import { Deferred } from '../../common/promise-util';
+import { WidgetExtractionHandler } from '../widget-extraction-handler';
 
 /** The class name added to ApplicationShell instances. */
 const APPLICATION_SHELL_CLASS = 'theia-ApplicationShell';
@@ -216,7 +217,8 @@ export class ApplicationShell extends Widget {
         @inject(SplitPositionHandler) protected splitPositionHandler: SplitPositionHandler,
         @inject(FrontendApplicationStateService) protected readonly applicationStateService: FrontendApplicationStateService,
         @inject(ApplicationShellOptions) @optional() options: RecursivePartial<ApplicationShell.Options> = {},
-        @inject(CorePreferences) protected readonly corePreferences: CorePreferences
+        @inject(CorePreferences) protected readonly corePreferences: CorePreferences,
+        @inject(WidgetExtractionHandler) protected readonly widgetExtractionHandler: WidgetExtractionHandler,
     ) {
         super(options as Widget.IOptions);
         this.addClass(APPLICATION_SHELL_CLASS);
@@ -1842,6 +1844,10 @@ export class ApplicationShell extends Widget {
             this.revealWidget(widget!.id);
         }
     }
+
+    moveWidgetToExternalWindow(widget: ExtractableWidget): void {
+        this.widgetExtractionHandler.moveWidgetToExternalWindow(widget, this.closeWidget.bind(this));
+    }
 }
 
 /**
@@ -1851,7 +1857,7 @@ export namespace ApplicationShell {
     /**
      * The areas of the application shell where widgets can reside.
      */
-    export type Area = 'main' | 'top' | 'left' | 'right' | 'bottom';
+    export type Area = 'main' | 'top' | 'left' | 'right' | 'bottom' | 'external';
 
     /**
      * The _side areas_ are those shell areas that can be collapsed and expanded,
@@ -1863,7 +1869,7 @@ export namespace ApplicationShell {
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     export function isValidArea(area?: any): area is ApplicationShell.Area {
-        const areas = ['main', 'top', 'left', 'right', 'bottom'];
+        const areas = ['main', 'top', 'left', 'right', 'bottom', 'external'];
         return (area !== undefined && typeof area === 'string' && areas.includes(area));
     }
 

@@ -24,6 +24,7 @@ import { TreeViewWidget } from './tree-view-widget';
 import { DescriptionWidget } from '@theia/core/lib/browser/view-container';
 import { DisposableCollection, Emitter } from '@theia/core/lib/common';
 import { ContextKeyService } from '@theia/core/lib/browser/context-key-service';
+import { ExtractableWidget } from '@theia/core/lib/browser/widgets/extractable-widget';
 
 @injectable()
 export class PluginViewWidgetIdentifier {
@@ -32,7 +33,7 @@ export class PluginViewWidgetIdentifier {
 }
 
 @injectable()
-export class PluginViewWidget extends Panel implements StatefulWidget, DescriptionWidget {
+export class PluginViewWidget extends Panel implements StatefulWidget, DescriptionWidget, ExtractableWidget {
 
     protected readonly toDispose = new DisposableCollection();
 
@@ -49,6 +50,9 @@ export class PluginViewWidget extends Panel implements StatefulWidget, Descripti
     readonly options: PluginViewWidgetIdentifier;
 
     currentViewContainerId: string | undefined;
+
+    isExtractable: boolean = true;
+    externalWindow: Window | undefined = undefined;
 
     constructor() {
         super();

@@ -246,6 +246,10 @@ export class ElectronMainApplication {
     async createWindow(asyncOptions: MaybePromise<TheiaBrowserWindowOptions> = this.getDefaultTheiaWindowOptions()): Promise<BrowserWindow> {
         let options = await asyncOptions;
         options = this.avoidOverlap(options);
+
+        // FIXME Do not open all windows as native: Make sure the open window call comes from the Theia frontend itself (not a plugin/vscode extension!)
+        options.webPreferences = { ...options.webPreferences, nativeWindowOpen: true };
+
         const electronWindow = this.windowFactory(options, this.config);
         const { window: { id } } = electronWindow;
         this.windows.set(id, electronWindow);

@@ -5,6 +5,31 @@
     <h3>Cloud & Desktop IDE Framework</h3>
 </div>
 
+# Multi Window MVP
+
+This MVP showcases multi window support in the Theia Electron example app
+
+Build and run via:
+
+```console
+yarn
+sed -e '/Host is not attached/s/^/\/\//g' -i node_modules/@phosphor/widgets/lib/widget.js
+yarn electron build
+yarn electron start
+```
+
+The MVP requires changes to PhosphorJS.
+If `sed` is not available on your system (or has a different interface), you can also manually edit `node_modules/@phosphor/widgets/lib/widget.js` and remove the check in line 913.
+
+The MVP allows extracting vscode extensions and Theia plugins (both are embedded in web views) to external windows.
+Every external window contains exactly one webview.
+To test this open a VS Code extension and click the split pane in the view's toolbar.
+
+The MVP includes a built version of the [VS Code webview sample](https://github.com/microsoft/vscode-extension-samples/blob/ac9bbf2e743ff0a25ebc82095c77b7c0a0fb4914/webview-sample/README.md).
+It can be started via the "Start cat coding session" command.
+
+# Theia
+
 <div id="badges" align="center">
 
   [![Gitpod Ready-to-Code](https://img.shields.io/badge/Gitpod-Ready--to--Code-blue?logo=gitpod)](https://gitpod.io/#https://github.com/eclipse-theia/theia)
@@ -42,6 +67,7 @@
 [Visit the Theia website](http://www.theia-ide.org) for more [documentation](http://www.theia-ide.org/doc).
 
 ## Scope
+
 - Support building browser-based and desktop IDEs
 - Provide a highly flexible architecture for adopters
 - Support VS Code Extension protocol
@@ -52,7 +78,9 @@
 See [our roadmap](https://github.com/eclipse-theia/theia/wiki/Eclipse-Theia-Roadmap) for an overview about the current project goals and the upcoming releases.
 
 ## Getting Started
+
 Here you can find guides and examples for common scenarios:
+
 - [Run Theia in Docker](https://github.com/theia-ide/theia-apps#theia-docker)
 - [Run Theia in Gitpod - a Theia-based IDE for GitHub](doc/Developing.md#run-the-browser-example-with-gitpod)
 - [Develop a Theia application - your own IDE](https://www.theia-ide.org/doc/Composing_Applications.html)
@@ -64,6 +92,7 @@ Here you can find guides and examples for common scenarios:
 ## Contributing
 
 Read below to learn how to take part in improving Theia:
+
 - Fork the repository and [run the examples from source](doc/Developing.md#quick-start)
 - Get familiar with [the development workflow](doc/Developing.md), [Coding Guidelines](https://github.com/eclipse-theia/theia/wiki/Coding-Guidelines), [Code of Conduct](CODE_OF_CONDUCT.md) and [learn how to sign your work](CONTRIBUTING.md#sign-your-work)
 - Find an issue to work on and submit a pull request
@@ -75,6 +104,7 @@ Read below to learn how to take part in improving Theia:
 ## Feedback
 
 Read below how to engage with Theia community:
+
 - Join the discussion on [Discourse](https://community.theia-ide.org/).
 - Ask a question, request a new feature and file a bug with [GitHub issues](https://github.com/eclipse-theia/theia/issues/new/choose).
 - Star the repository to show your support.
@@ -97,8 +127,7 @@ Read below how to engage with Theia community:
 - [Eclipse Public License 2.0](LICENSE)
 - [一 (Secondary) GNU General Public License, version 2 with the GNU Classpath Exception](LICENSE)
 
-
 ## Trademark
-"Theia" is a trademark of the Eclipse Foundation
-https://www.eclipse.org/theia
 
+"Theia" is a trademark of the Eclipse Foundation
+<https://www.eclipse.org/theia>

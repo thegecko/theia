@@ -120,6 +120,9 @@ import {
 import { RendererHost } from './widgets';
 import { TooltipService, TooltipServiceImpl } from './tooltip-service';
 import { bindFrontendStopwatch, bindBackendStopwatch } from './performance';
+import { ExtractWidgetCommandContribution } from './widget-extraction-contribution';
+import { WidgetExtractionHandler } from './widget-extraction-handler';
+import { ExtractWindowToolbarContribution } from './extract-window-toolbar-contribution';
 
 export { bindResourceProvider, bindMessageService, bindPreferenceService };
 
@@ -394,4 +397,10 @@ export const frontendApplicationModule = new ContainerModule((bind, unbind, isBo
 
     bindFrontendStopwatch(bind);
     bindBackendStopwatch(bind);
+    bind(WidgetExtractionHandler).toSelf().inSingletonScope();
+    bind(ExtractWidgetCommandContribution).toSelf().inSingletonScope();
+    bind(CommandContribution).toService(ExtractWidgetCommandContribution);
+
+    bind(ExtractWindowToolbarContribution).toSelf().inSingletonScope();
+    bind(TabBarToolbarContribution).toService(ExtractWindowToolbarContribution);
 });
