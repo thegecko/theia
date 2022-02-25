@@ -857,6 +857,9 @@ export function createAPIFactory(
             },
             removeBreakpoints(breakpoints: theia.Breakpoint[]): void {
                 debugExt.removeBreakpoints(breakpoints);
+            },
+            asDebugSourceUri(source: theia.DebugProtocolSource, session?: theia.DebugSession): theia.Uri {
+                return debugExt.asDebugSourceUri(source, session);
             }
         };
 

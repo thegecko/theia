@@ -230,6 +230,15 @@ export class DebugMainImpl implements DebugMain, Disposable {
         }
     }
 
+    async $getDebugProtocolBreakpoint(sessionId: string, breakpoint: Breakpoint): Promise<DebugProtocol.Breakpoint | undefined> {
+        const session = this.sessionManager.getSession(sessionId);
+        if (session) {
+            return session.getBreakpoint(breakpoint.id)?.raw;
+        } else {
+            throw new Error(`Debug session '${sessionId}' not found`);
+        }
+    }
+
     async $removeBreakpoints(breakpoints: string[]): Promise<void> {
         const { labelProvider, breakpointsManager, editorManager } = this;
         const session = this.sessionManager.currentSession;

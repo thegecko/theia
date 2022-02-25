@@ -1667,6 +1667,7 @@ export interface DebugMain {
     $startDebugging(folder: theia.WorkspaceFolder | undefined, nameOrConfiguration: string | theia.DebugConfiguration, options: theia.DebugSessionOptions): Promise<boolean>;
     $stopDebugging(sessionId?: string): Promise<void>;
     $customRequest(sessionId: string, command: string, args?: any): Promise<DebugProtocol.Response>;
+    $getDebugProtocolBreakpoint(sessionId: string, breakpoint: Breakpoint): Promise<theia.DebugProtocolBreakpoint | undefined>;
 }
 
 export interface FileSystemExt {

@@ -33,6 +33,8 @@ import { connectInlineDebugAdapter, connectPipeDebugAdapter, connectSocketDebugA
 import { PluginDebugAdapterTracker } from './plugin-debug-adapter-tracker';
 import uuid = require('uuid');
 import { DebugAdapter } from '@theia/debug/lib/node/debug-model';
+import { DebugProtocol } from 'vscode-debugprotocol';
+import TheiaURI from '@theia/core/lib/common/uri';
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
@@ -180,6 +182,31 @@ export class DebugExtImpl implements DebugExt {
         return Disposable.create(() => this.descriptorFactories.delete(debugType));
     }
 
+    static SCHEME = 'debug';
+    static SCHEME_PATTERN = /^[a-zA-Z][a-zA-Z0-9\+\-\.]+:/;
+    asDebugSourceUri(source: theia.DebugProtocolSource, session?: theia.DebugSession): theia.Uri {
+        const raw = source as DebugProtocol.Source;
+        const uri = this.asDebugSourceURI(raw, session?.id);
+        return theia.Uri.parse(uri.toString());
+    }
+
+    private asDebugSourceURI(raw: DebugProtocol.Source, sessionId?: string): TheiaURI {
+        if (raw.sourceReference && raw.sourceReference > 0) {
+            let query = String(raw.sourceReference);
+            if (sessionId) {
+                query += `?session=${sessionId}`;
+            }
+            return new TheiaURI().withScheme(DebugExtImpl.SCHEME).withPath(raw.name!).withQuery(query);
+        }
+        if (!raw.path) {
+            throw new Error('Unrecognized source type: ' + JSON.stringify(raw));
+        }
+        if (raw.path.match(DebugExtImpl.SCHEME_PATTERN)) {
+            return new TheiaURI(raw.path);
+        }
+        return new TheiaURI(URI.file(raw.path));
+    }
+
     registerDebugAdapterTrackerFactory(debugType: string, factory: theia.DebugAdapterTrackerFactory): Disposable {
         if (!factory) {
             return Disposable.create(() => { });
@@ -300,7 +327,9 @@ export class DebugExtImpl implements DebugExt {
                     return response.body;
                 }
                 return Promise.reject(new Error(response.message ?? 'custom request failed'));
-            }
+            },
+            getDebugProtocolBreakpoint: async (breakpoint: Breakpoint) =>
+                this.proxy.$getDebugProtocolBreakpoint(sessionId, breakpoint)
         };
 
         const tracker = await this.createDebugAdapterTracker(theiaSession);
