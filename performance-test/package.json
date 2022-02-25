@@ -1,0 +1,25 @@
+{
+	"name": "theia-performance-test",
+	"license": "EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0",
+	"contributors": [
+		{
+			"name": "STMicroelectronics"
+		}
+	],
+	"description": "",
+	"version": "0.0.1",
+	"keywords": [
+		"theia-extension"
+	],
+	"scripts": {
+		"prepare": "yarn run build",
+		"build": "tsc",
+		"watch": "tsc -watch -p ./",
+		"clean": "rimraf lib"
+	},
+	"devDependencies": {
+		"rimraf": "^3.0.2"
+	},
+	"main": "lib/index",
+	"types": "lib/index"
+}

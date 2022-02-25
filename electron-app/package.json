@@ -1,0 +1,38 @@
+{
+  "private": true,
+  "name": "electron-app",
+  "license": "EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0",
+  "version": "0.0.0",
+  "dependencies": {
+    "@theia/core": "next",
+    "@theia/filesystem": "next",
+    "@theia/electron": "next",
+    "@theia/messages": "next",
+    "@theia/process": "next",
+    "@theia/terminal": "next",
+    "@theia/workspace": "next",
+    "@theia/plugin": "next",
+    "@theia/plugin-ext": "next",
+    "@theia/plugin-ext-vscode": "next",
+    "theia-performance-test-extension":"0.0.1"
+  },
+  "devDependencies": {
+    "@theia/cli": "next",
+    "electron": "^15.3.5"
+  },
+  "scripts": {
+    "prepare": "theia build --mode development",
+    "rebuild": "theia rebuild:electron",
+    "configure":"cross-env PERFORMANCE_TEST_ENV=theia-plugin-electron",
+    "start": "yarn configure && yarn rebuild && theia start --plugins=local-dir:../plugins --workspace-root=../workspace  --log-level=debug --remote-debugging-port=9222",
+    "watch": "theia build --watch --mode development"
+  },
+  "theia": {
+    "target": "electron",
+    "frontend": {
+      "config": {
+        "applicationName": "Theia Performance Test App"
+      }
+    }
+  }
+}

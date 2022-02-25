@@ -1,0 +1,38 @@
+{
+  "private": true,
+  "name": "browser-app",
+  "license": "EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0",
+  "version": "0.0.0",
+  "dependencies": {
+    "@theia/core": "next",
+    "@theia/filesystem": "next",
+    "@theia/messages": "next",
+    "@theia/process": "next",
+    "@theia/terminal": "next",
+    "@theia/workspace": "next",
+    "@theia/plugin": "next",
+    "@theia/plugin-ext": "next",
+    "@theia/output": "next",
+    "@theia/plugin-ext-vscode": "next",
+    "theia-performance-test-extension":"0.0.1"
+  },
+  "devDependencies": {
+    "@theia/cli": "next",
+    "cross-env": "^7.0.3"
+  },
+  "scripts": {
+    "prepare": "theia build --mode development",
+    "rebuild": "theia rebuild:browser",
+    "configure": "cross-env PERFORMANCE_TEST_ENV=theia-plugin-browser",
+    "start": "yarn configure && yarn rebuild && theia start --plugins=local-dir:../plugins --workspace-root=../workspace",
+    "watch": "theia build --watch --mode development"
+  },
+  "theia": {
+    "target": "browser",
+    "frontend": {
+      "config": {
+        "applicationName": "Theia Performance Test App"
+      }
+    }
+  }
+}

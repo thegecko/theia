@@ -1,0 +1,32 @@
+{
+	"name": "theia-performance-test-extension",
+	"license": "EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0",
+	"contributors": [
+		{"name": "STMicroelectronics"}
+	],
+	"description": "Semi automated JSON-RPC performance test in Theia extensions",
+	"version": "0.0.1",
+	"keywords": [
+		"theia-extension"
+	],
+	"dependencies": {
+		"@theia/core": "next",
+		"@theia/output": "next",
+		"theia-performance-test": "0.0.1"
+	},
+	"scripts": {
+		"prepare": "yarn run build",
+		"build": "tsc -p ./",
+		"watch": "tsc -watch -p ./",
+		"clean": "rimraf lib"
+	},
+	"devDependencies": {
+		"rimraf": "^3.0.2"
+	},
+	"theiaExtensions": [
+		{
+			"frontend": "lib/browser/frontend-module",
+			"backend": "lib/node/backend-module"
+		}
+	]
+}

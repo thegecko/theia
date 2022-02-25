@@ -1,0 +1,27 @@
+{
+  "private": true,
+  "scripts": {
+    "prepare": "lerna run prepare",
+    "rebuild:browser": "theia rebuild:browser",
+    "rebuild:electron": "theia rebuild:electron",
+    "watch": "lerna run --parallel watch",
+    "upgrade:next": "yarn upgrade -s @theia",
+    "generate:resources":"ts-node ./scripts/generate-resources.ts",
+    "clean:results":"rimraf workspace/results",
+    "test": "yarn"
+  },
+  "devDependencies": {
+    "ts-node":"10.5.0",
+    "rimraf":"3.0.2",
+    "@types/node": "12.x",
+    "lerna": "^4.0.0",
+    "typescript": "^4.3.2"
+  },
+  "workspaces": [
+    "performance-test-plugin",
+    "performance-test-extension",
+    "performance-test",
+    "browser-app",
+    "electron-app"
+  ]
+}

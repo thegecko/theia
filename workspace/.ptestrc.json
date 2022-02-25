@@ -1,0 +1,5 @@
+{
+    "testRuns":25,
+    "resultDir":"results",
+    "resourceDir":"resources"
+}

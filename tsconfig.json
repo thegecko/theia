@@ -1,0 +1,14 @@
+{
+  "extends": "./configs/base.tsconfig",
+  "compilerOptions": {
+    "baseUrl": "."
+  },
+  "include": [
+    "performance-test",
+    "performance-test-extension",
+    "performance-test-plugin",
+    "browser-app",
+    "electron-app",
+    "scripts"
+  ]
+}
